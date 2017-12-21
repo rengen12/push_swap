@@ -29,5 +29,8 @@ void pb(t_stack **heada, t_stack **headb);
 void ra(t_stack **head);
 void rb(t_stack **head);
 void rr(t_stack **heada, t_stack **headb);
+void rra(t_stack **head);
+void rrb(t_stack **head);
+void rrr(t_stack **heada, t_stack **headb);
 
 #endif

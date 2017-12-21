@@ -92,6 +92,8 @@ void ra(t_stack **head)
 
 	if (head)
 	{
+		if (!(*head)->next)
+			return ;
 		thead = *head;
 		while (thead->next)
 			thead = thead->next;
@@ -108,6 +110,8 @@ void rb(t_stack **head)
 
 	if (head)
 	{
+		if (!(*head)->next)
+			return ;
 		thead = *head;
 		while (thead->next)
 			thead = thead->next;
@@ -130,7 +134,36 @@ void rra(t_stack **head)
 
 	if (head)
 	{
-		
+		if (!(*head)->next)
+			return ;
+		thead = *head;
+		while (thead->next->next)
+			thead = thead->next;
+		thead->next->next = *head;
+		*head = thead->next;
+		thead->next = NULL;
 	}
 }
 
+void rrb(t_stack **head)
+{
+	t_stack *thead;
+
+	if (head)
+	{
+		if (!(*head)->next)
+			return ;
+		thead = *head;
+		while (thead->next->next)
+			thead = thead->next;
+		thead->next->next = *head;
+		*head = thead->next;
+		thead->next = NULL;
+	}
+}
+
+void rrr(t_stack **heada, t_stack **headb)
+{
+	rra(heada);
+	rrb(headb);
+}

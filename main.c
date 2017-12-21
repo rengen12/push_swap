@@ -56,14 +56,12 @@ int 	main(void)
 		add_node(&stacka, num);
 		i++;
 	}
-	add_node(&stackb, 5);
-	add_node(&stackb, 10);
+	//add_node(&stackb, 5);
+	//add_node(&stackb, 10);
 
 	print_stack(stacka, stackb);
 
-	rr(&stacka, &stackb);
-	print_stack(stacka, stackb);
-	rr(&stacka, &stackb);
+	rrr(&stacka, &stackb);
 	print_stack(stacka, stackb);
 	/*sa(NULL);
 	pb(&stacka, &stackb);
