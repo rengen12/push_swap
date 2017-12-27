@@ -12,7 +12,7 @@
 
 #include "stack.h"
 
-void add_node(t_stack **head, int cont)
+void add_node(t_stack **head, ssize_t cont)
 {
 	t_stack *node;
 
@@ -29,6 +29,7 @@ void add_node(t_stack **head, int cont)
 void sa(t_stack **head)
 {
 	t_stack *next;
+
 	if (head)
 		if (*head && (*head)->next)
 		{
@@ -42,6 +43,7 @@ void sa(t_stack **head)
 void sb(t_stack **head)
 {
 	t_stack *next;
+
 	if (head)
 		if (*head && (*head)->next)
 		{
@@ -92,6 +94,8 @@ void ra(t_stack **head)
 
 	if (head)
 	{
+		if (!*head)
+			return ;
 		if (!(*head)->next)
 			return ;
 		thead = *head;
@@ -110,6 +114,8 @@ void rb(t_stack **head)
 
 	if (head)
 	{
+		if (!*head)
+			return ;
 		if (!(*head)->next)
 			return ;
 		thead = *head;
@@ -134,6 +140,8 @@ void rra(t_stack **head)
 
 	if (head)
 	{
+		if (!*head)
+			return ;
 		if (!(*head)->next)
 			return ;
 		thead = *head;
@@ -151,6 +159,8 @@ void rrb(t_stack **head)
 
 	if (head)
 	{
+		if (!*head)
+			return ;
 		if (!(*head)->next)
 			return ;
 		thead = *head;

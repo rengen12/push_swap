@@ -13,6 +13,7 @@
 #include "stack.h"
 #include <time.h>
 #include <stdio.h>
+#include "libft/libft.h"
 
 void	print_stack(t_stack *head1, t_stack *head2)
 {
@@ -35,33 +36,44 @@ void	print_stack(t_stack *head1, t_stack *head2)
 		else
 			printf("%10c\n", '-');
 	}
-	printf("%10s %10s\n", "stack a", "stack b");
+	printf("%10s %10s\n", "a", "b");
 }
 
-int 	main(void)
+void datatostack(int ac, char **av, t_stack **stack)
+{
+	while (ac > 1)
+	{
+		add_node(stack, ft_atoi(av[ac - 1]));
+		ac--;
+	}
+}
+
+int 	main(int ac, char **av)
 {
 	t_stack *stacka;
 	t_stack *stackb;
-	time_t t;
+	//time_t t;
 	int i = 0;
 	int num = 0;
 
 	stacka = NULL;
 	stackb = NULL;
-	srand((unsigned) time(&t));
+	//srand((unsigned) time(&t));
 
-	while (i < 10)
+	/*while (i < 10)
 	{
 		num += rand() % 15;
 		add_node(&stacka, num);
 		i++;
-	}
+	}*/
+
 	//add_node(&stackb, 5);
 	//add_node(&stackb, 10);
 
 	print_stack(stacka, stackb);
-
-	rrr(&stacka, &stackb);
+	datatostack(ac, av, &stacka);
+	//sb(&stackb);
+	//rrr(&stacka, &stackb);
 	print_stack(stacka, stackb);
 	/*sa(NULL);
 	pb(&stacka, &stackb);
