@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
-#include <time.h>
-#include <stdio.h>
 #include "libft/libft.h"
+#include "stack.h"
+//#include <time.h>
+#include <stdio.h>
 
 void	print_stack(t_stack *head1, t_stack *head2)
 {
-	int v1, v2;
+	//int v1, v2;
 
 	while (head1 || head2)
 	{
@@ -53,8 +53,8 @@ int 	main(int ac, char **av)
 	t_stack *stacka;
 	t_stack *stackb;
 	//time_t t;
-	int i = 0;
-	int num = 0;
+	/*int i = 0;
+	int num = 0;*/
 
 	stacka = NULL;
 	stackb = NULL;

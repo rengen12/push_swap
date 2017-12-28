@@ -13,6 +13,7 @@
 #ifndef STACK_H
 # define STACK_H
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct	s_stack
 {
@@ -32,5 +33,6 @@ void rr(t_stack **heada, t_stack **headb);
 void rra(t_stack **head);
 void rrb(t_stack **head);
 void rrr(t_stack **heada, t_stack **headb);
+
 
 #endif
