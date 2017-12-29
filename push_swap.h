@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/29 17:37:00 by amichak           #+#    #+#             */
-/*   Updated: 2017/12/29 17:37:00 by amichak          ###   ########.fr       */
+/*   Created: 2017/12/29 20:43:00 by amichak           #+#    #+#             */
+/*   Updated: 2017/12/29 20:43:00 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+# include "libft/libft.h"
+# include "stack.h"
 
-int 	main(int ac, char **av)
-{
-	char	*line;
+void	datatostack(int ac, int file, char **av, t_stack **stack);
+void	ft_delete_exit(char *message, t_stack **stack);
 
-	if (ac == 1)
-		ft_delete_exit("Enter pls correct num line and command list", NULL);
-
-}
+#endif

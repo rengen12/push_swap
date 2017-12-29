@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "stack.h"
+#include <stdio.h>
 
 void add_node(t_stack **head, int cont)
 {
@@ -186,4 +187,26 @@ void rrr(t_stack **heada, t_stack **headb)
 {
 	rra(heada);
 	rrb(headb);
+}
+
+void	print_stack(t_stack *head1, t_stack *head2)
+{
+	while (head1 || head2)
+	{
+		if (head1)
+		{
+			printf("%12d ", head1->cont);
+			head1 = head1->next;
+		}
+		else
+			printf("%12c ", '-');
+		if (head2)
+		{
+			printf("%12d\n", head2->cont);
+			head2 = head2->next;
+		}
+		else
+			printf("%12c\n", '-');
+	}
+	printf("%12s %12s\n", "a", "b");
 }

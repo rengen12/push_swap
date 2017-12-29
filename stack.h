@@ -21,19 +21,20 @@ typedef struct	s_stack
 	struct s_stack	*next;
 }				t_stack;
 
-void add_node(t_stack **head, int cont);
-void delete_stack(t_stack **head);
-void sa(t_stack **head);
-void sb(t_stack **head);
-void ss(t_stack **heada, t_stack **headb);
-void pa(t_stack **heada, t_stack **headb);
-void pb(t_stack **heada, t_stack **headb);
-void ra(t_stack **head);
-void rb(t_stack **head);
-void rr(t_stack **heada, t_stack **headb);
-void rra(t_stack **head);
-void rrb(t_stack **head);
-void rrr(t_stack **heada, t_stack **headb);
+void	add_node(t_stack **head, int cont);
+void	delete_stack(t_stack **head);
+void	print_stack(t_stack *head1, t_stack *head2);
+void	sa(t_stack **head);
+void	sb(t_stack **head);
+void	ss(t_stack **heada, t_stack **headb);
+void	pa(t_stack **heada, t_stack **headb);
+void	pb(t_stack **heada, t_stack **headb);
+void	ra(t_stack **head);
+void	rb(t_stack **head);
+void	rr(t_stack **heada, t_stack **headb);
+void	rra(t_stack **head);
+void	rrb(t_stack **head);
+void	rrr(t_stack **heada, t_stack **headb);
 
 
 #endif

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/29 17:37:00 by amichak           #+#    #+#             */
-/*   Updated: 2017/12/29 17:37:00 by amichak          ###   ########.fr       */
+/*   Created: 2017/11/17 17:10:41 by amichak           #+#    #+#             */
+/*   Updated: 2017/11/20 22:18:12 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include <fcntl.h>
+# include "libft/libft.h"
+# define BUFF_SIZE 12
 
-int 	main(int ac, char **av)
-{
-	char	*line;
+int		get_next_line(const int fd, char **line);
 
-	if (ac == 1)
-		ft_delete_exit("Enter pls correct num line and command list", NULL);
-
-}
+#endif
