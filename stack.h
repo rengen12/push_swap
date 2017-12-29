@@ -21,7 +21,8 @@ typedef struct	s_stack
 	struct s_stack	*next;
 }				t_stack;
 
-void add_node(t_stack **head, ssize_t cont);
+void add_node(t_stack **head, int cont);
+void delete_stack(t_stack **head);
 void sa(t_stack **head);
 void sb(t_stack **head);
 void ss(t_stack **heada, t_stack **headb);

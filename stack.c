@@ -12,7 +12,7 @@
 
 #include "stack.h"
 
-void add_node(t_stack **head, ssize_t cont)
+void add_node(t_stack **head, int cont)
 {
 	t_stack *node;
 
@@ -23,6 +23,16 @@ void add_node(t_stack **head, ssize_t cont)
 		node->cont = cont;
 		node->next = *head;
 		*head = node;
+	}
+}
+
+void delete_stack(t_stack **head)
+{
+	if (head && *head)
+	{
+		if ((*head)->next)
+			delete_stack(&(*head)->next);
+		free(*head);
 	}
 }
 

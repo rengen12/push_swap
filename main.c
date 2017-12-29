@@ -17,8 +17,6 @@
 
 void	print_stack(t_stack *head1, t_stack *head2)
 {
-	//int v1, v2;
-
 	while (head1 || head2)
 	{
 		if (head1)
@@ -39,12 +37,42 @@ void	print_stack(t_stack *head1, t_stack *head2)
 	printf("%10s %10s\n", "a", "b");
 }
 
+void ft_error(char *message)
+{
+	ft_putendl_fd(message, 2);
+	exit(0);
+}
+
+void ft_delete_exit(char *message, t_stack **stack)
+{
+	delete_stack(stack);
+	ft_error(message);
+}
+
+int	check_duplicates(int num, t_stack *stack)
+{
+	while (stack)
+		if (stack->cont == num)
+			return (1);
+		else
+			stack = stack->next;
+	return (0);
+}
+
 void datatostack(int ac, char **av, t_stack **stack)
 {
-	while (ac > 1)
+	ssize_t	num;
+
+	while (ac)
 	{
-		add_node(stack, ft_atoi(av[ac - 1]));
-		ac--;
+		if (!ft_isdigit(*av[ac]))
+			ft_delete_exit("Error!", stack);
+		num = ft_atoi(av[ac--]);
+		if (num > 2147483647 || num < -2147483648)
+			ft_delete_exit("Error!", stack);
+		if (check_duplicates((int)num, *stack))
+			ft_delete_exit("Error!\nDuplicate found", stack);
+		add_node(stack, (int)num);
 	}
 }
 
@@ -71,7 +99,7 @@ int 	main(int ac, char **av)
 	//add_node(&stackb, 10);
 
 	print_stack(stacka, stackb);
-	datatostack(ac, av, &stacka);
+	datatostack(ac - 1, av, &stacka);
 	//sb(&stackb);
 	//rrr(&stacka, &stackb);
 	print_stack(stacka, stackb);
@@ -80,5 +108,11 @@ int 	main(int ac, char **av)
 	print_stack(stacka, stackb);
 	pb(&stacka, &stackb);
 	print_stack(stacka, stackb);*/
+
+
+
+
+	delete_stack(&stacka);
+	delete_stack(&stackb);
 	return (0);
 }
