@@ -1,3 +1,7 @@
 \cmake-build-debug/**
 \.idea/**
 CMakeLists.txt
+push_swap
+checker
+libft/libft.a
+**obj**

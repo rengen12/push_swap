@@ -21,20 +21,20 @@ void	print_stack(t_stack *head1, t_stack *head2)
 	{
 		if (head1)
 		{
-			printf("%10d ", head1->cont);
+			printf("%12d ", head1->cont);
 			head1 = head1->next;
 		}
 		else
-			printf("%10c ", '-');
+			printf("%12c ", '-');
 		if (head2)
 		{
-			printf("%10d\n", head2->cont);
+			printf("%12d\n", head2->cont);
 			head2 = head2->next;
 		}
 		else
-			printf("%10c\n", '-');
+			printf("%12c\n", '-');
 	}
-	printf("%10s %10s\n", "a", "b");
+	printf("%12s %12s\n", "a", "b");
 }
 
 void ft_error(char *message)
@@ -65,11 +65,11 @@ void datatostack(int ac, char **av, t_stack **stack)
 
 	while (ac)
 	{
-		if (!ft_isdigit(*av[ac]))
-			ft_delete_exit("Error!", stack);
+		if (!ft_isdigit(*av[ac]) && *av[ac] != '-')
+			ft_delete_exit("Error!\nWrong argument", stack);
 		num = ft_atoi(av[ac--]);
 		if (num > 2147483647 || num < -2147483648)
-			ft_delete_exit("Error!", stack);
+			ft_delete_exit("Error!\nOut of int's range", stack);
 		if (check_duplicates((int)num, *stack))
 			ft_delete_exit("Error!\nDuplicate found", stack);
 		add_node(stack, (int)num);

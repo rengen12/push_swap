@@ -44,7 +44,7 @@ $(NAME):			$(OBJ)
 	
 $(OBJFOLD)%.o:      %.c
 	@mkdir -p $(OBJFOLD)
-	$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
+	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJFOLD)
