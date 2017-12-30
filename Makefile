@@ -5,22 +5,28 @@ CFLAGS = -Wall -Wextra -Werror
 NAME1 = push_swap
 NAME2 = checker
 HEADER = -I ./
-SRC1 = push_swap.c stack.c interface.c get_next_line.c
-# SRC2 =
+SRC0 = stack.c interface.c get_next_line.c
+SRC1 = push_swap.c
+SRC2 = checker.c
 OBJFOLD = ./obj/
 LIBFOLD = ./libft/
 LIBFT = -L. libft/libft.a
+OBJ0 = $(addprefix $(OBJFOLD), $(patsubst %.c, %.o, $(SRC0)))
 OBJ1 = $(addprefix $(OBJFOLD), $(patsubst %.c, %.o, $(SRC1)))
-# MKOBJ2 = $(addprefix $(OBJFOLD), $(patsubst %.c, %.o, $(SRC2)))
+OBJ2 = $(addprefix $(OBJFOLD), $(patsubst %.c, %.o, $(SRC2)))
 # OBJ1 = $(addprefix $(OBJFOLD), $(SRC1:.c=.o))
 # OBJ2 = $(addprefix $(OBJFOLD), $(SRC2:.c=.o))
 
-all: 		    $(NAME1)
+all:			$(NAME1) $(NAME2)
 
-$(NAME1):	    $(OBJ1)
-	@make -C $(LIBFOLD) -f Makefile
-	$(CC) $(CFLAGS) -o $(NAME1) $(OBJ1) $(LIBFT)
+$(NAME1):		$(OBJ0) $(OBJ1) $(NAME2)
+	$(CC) $(CFLAGS) -o $(NAME1) $(OBJ0) $(OBJ1) $(LIBFT)
 	@echo "push_swap: done"
+
+$(NAME2):		$(OBJ2)
+	@make -C $(LIBFOLD) -f Makefile
+	$(CC) $(CFLAGS) -o $(NAME2) $(OBJ0) $(OBJ2) $(LIBFT)
+	@echo "checker: done"
 
 $(OBJFOLD)%.o:  %.c
 	@mkdir -p $(OBJFOLD)

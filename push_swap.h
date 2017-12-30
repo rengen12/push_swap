@@ -17,5 +17,6 @@
 
 void	datatostack(int ac, int file, char **av, t_stack **stack);
 void	ft_delete_exit(char *message, t_stack **stack);
+int 	is_sorted(t_stack *stack);
 
 #endif

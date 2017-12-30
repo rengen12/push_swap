@@ -14,46 +14,48 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-int 	is_sorted(t_stack *stack)
-{
-	if (stack)
-	{
-		while (stack->next)
-			if (stack->cont > stack->next->cont)
-				return (0);
-			else
-				stack = stack->next;
-	}
-	return (1);
-}
-
 /*void	margesort(t_stack *sta, t_stack *stb, int qe)
 {
 
 }
 margesort(&stacka, &stackb, ac - 1);*/
 
-char*	bublesort(t_stack *sta, t_stack *stb)
+char*	bublesort(t_stack **sta, t_stack **stb, char *cmds)
 {
-	t_stack *heada;
-
-	if (!sta)
+	if (!sta || !*sta)
 		return (NULL);
-	heada = sta;
-	while (heada)
+	while ((*sta)->next)
 	{
-		while (sta->next)
-			if (sta->cont > sta->next->cont)
-				break;
-			else
-				sta = sta->next;
-		while (heada != sta && sta->next)
-			pb(&sta, &stb);
-		if (sta->cont > sta->next->cont)
-			sa(&heada);
-		sta = heada;
-		print_stack(sta, stb);
+		if ((*sta)->cont < (*sta)->next->cont)
+		{
+			pb(sta, stb);
+			cmds = ft_strjoin(cmds, "pb\n");
+		}
+		else
+		{
+			sa(sta);
+			cmds = ft_strjoin(cmds, "sa\n");
+		}
 	}
+	while ((*stb)->next)
+	{
+		if ((*stb)->cont > (*stb)->next->cont)
+		{
+			pa(sta, stb);
+			cmds = ft_strjoin(cmds, "pa\n");
+		}
+		else
+		{
+			sb(stb);
+			cmds = ft_strjoin(cmds, "sb\n");
+		}
+	}
+	if (*stb)
+	{
+		pa(sta, stb);
+		cmds = ft_strjoin(cmds, "pa\n");
+	}
+	return (cmds);
 }
 
 int 	main(int ac, char **av)
@@ -61,11 +63,12 @@ int 	main(int ac, char **av)
 	t_stack *stacka;
 	t_stack *stackb;
 	int 	fd;
-	char 	*cmnds;
+	char 	*cmds;
 
 	stacka = NULL;
 	stackb = NULL;
-	printf("ac = %d\n", ac);
+	cmds = "";
+	//printf("ac = %d\n", ac);
 
 	if (ac == 3 && !ft_strcmp(av[1], "-f"))
 	{
@@ -76,13 +79,16 @@ int 	main(int ac, char **av)
 	}
 	else
 		datatostack(ac - 1, 0, av, &stacka);
-	print_stack(stacka, stackb);
+	//print_stack(stacka, stackb);
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
-		cmnds = bublesort(stacka, stackb);
-	//ft_putstr(cmnds);
-	print_stack(stacka, stackb);
+		while (!is_sorted(stacka))
+		{
+			cmds = bublesort(&stacka, &stackb, cmds);
+		}
+	ft_putstr(cmds);
+	//print_stack(stacka, stackb);
 
 
 	delete_stack(&stacka);

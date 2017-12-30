@@ -53,3 +53,16 @@ void	datatostack(int ac, int file, char **av, t_stack **stack)
 			break ;
 	}
 }
+
+int 	is_sorted(t_stack *stack)
+{
+	if (stack)
+	{
+		while (stack->next)
+			if (stack->cont > stack->next->cont)
+				return (0);
+			else
+				stack = stack->next;
+	}
+	return (1);
+}
