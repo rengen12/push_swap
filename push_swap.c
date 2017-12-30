@@ -31,44 +31,58 @@ int 	is_sorted(t_stack *stack)
 {
 
 }
-*/
+margesort(&stacka, &stackb, ac - 1);*/
+
+char*	bublesort(t_stack *sta, t_stack *stb)
+{
+	t_stack *heada;
+
+	if (!sta)
+		return (NULL);
+	heada = sta;
+	while (heada)
+	{
+		while (sta->next)
+			if (sta->cont > sta->next->cont)
+				break;
+			else
+				sta = sta->next;
+		while (heada != sta && sta->next)
+			pb(&sta, &stb);
+		if (sta->cont > sta->next->cont)
+			sa(&heada);
+		sta = heada;
+		print_stack(sta, stb);
+	}
+}
+
 int 	main(int ac, char **av)
 {
 	t_stack *stacka;
 	t_stack *stackb;
-	int fd;
-	//time_t t;
-	/*int i = 0;
-	int num = 0;*/
+	int 	fd;
+	char 	*cmnds;
 
 	stacka = NULL;
 	stackb = NULL;
 	printf("ac = %d\n", ac);
-	//srand((unsigned) time(&t));
 
-	/*while (i < 10)
+	if (ac == 3 && !ft_strcmp(av[1], "-f"))
 	{
-		num += rand() % 15;
-		add_node(&stacka, num);
-		i++;
-	}*/
-
-	//add_node(&stackb, 5);
-	//add_node(&stackb, 10);
-	if (ac == 3)
-		if (!ft_strcmp(av[1], "-f"))
-		{
-			fd = open(av[2], O_RDONLY);
-			get_next_line(fd, av);
-			ac = 2;
-		}
-	datatostack(ac - 1, av, &stacka);
+		fd = open(av[2], O_RDONLY);
+		while (get_next_line(fd, av) > 0)
+			datatostack(0, 1, av, &stacka);
+		close(fd);
+	}
+	else
+		datatostack(ac - 1, 0, av, &stacka);
 	print_stack(stacka, stackb);
-	/*if (is_sorted(stacka))
+	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
-		margesort(&stacka, &stackb, ac - 1);*/
-
+		cmnds = bublesort(stacka, stackb);
+	//ft_putstr(cmnds);
+	print_stack(stacka, stackb);
 
 
 	delete_stack(&stacka);
