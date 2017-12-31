@@ -39,7 +39,7 @@ static void func_cmnds(t_stack **a, t_stack **b, char *cmd)
 		rrr(a, b);
 	else
 	{
-		ft_delete_exit(NULL, a);
+		delete_stack(a);
 		ft_delete_exit("Wrong command in command list", b);
 	}
 }
@@ -59,7 +59,9 @@ int 	main(int ac, char **av)
 	{
 		fd = open(av[2], O_RDONLY);
 		while (get_next_line(fd, av) > 0)
-			datatostack(0, 1, av, &stacka);
+			datatostack(0, 1, av, &stackb);
+		while(stackb)
+			pa(&stacka, &stackb);
 		close(fd);
 	}
 	else

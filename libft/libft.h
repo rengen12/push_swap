@@ -94,4 +94,6 @@ void			ft_putnbr_base(int nbr, char *base);
 void			ft_div_mod(int a, int b, int *div, int *mod);
 int				ft_srch_arrelem(int *arr, int size, int elem);
 void			ft_arrrev(int *arr, size_t size);
+int 			*ft_arrnew(int len);
+void			ft_putarr(int *arr, int len, char separator);
 #endif
