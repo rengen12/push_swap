@@ -14,6 +14,108 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
+// Returns the last node of the list
+t_stack *getTail(t_stack *cur)
+{
+	while (cur != NULL && cur->next != NULL)
+		cur = cur->next;
+	return (cur);
+}
+
+// Partitions the list taking the last element as the pivot
+t_stack *partition(t_stack *head, t_stack *end,
+					   t_stack **newHead, t_stack **newEnd)
+{
+	t_stack *pivot = end;
+	t_stack *prev = NULL, *cur = head, *tail = pivot;
+
+	// During partition, both the head and end of the list might change
+	// which is updated in the newHead and newEnd variables
+	while (cur != pivot)
+	{
+		if (cur->cont < pivot->cont)
+		{
+			// First node that has a value less than the pivot - becomes
+			// the new head
+			if ((*newHead) == NULL)
+				(*newHead) = cur;
+
+			prev = cur;
+			cur = cur->next;
+		}
+		else // If cur node is greater than pivot
+		{
+			// Move cur node to next of tail, and change tail
+			if (prev)
+				prev->next = cur->next;
+			t_stack *tmp = cur->next;
+			cur->next = NULL;
+			tail->next = cur;
+			tail = cur;
+			cur = tmp;
+		}
+	}
+
+	// If the pivot data is the smallest element in the current list,
+	// pivot becomes the head
+	if ((*newHead) == NULL)
+		(*newHead) = pivot;
+
+	// Update newEnd to the current last node
+	(*newEnd) = tail;
+
+	// Return the pivot node
+	return pivot;
+}
+
+
+//here the sorting happens exclusive of the end node
+t_stack *quickSortRecur(t_stack *head, t_stack *end)
+{
+	// base condition
+	if (!head || head == end)
+		return head;
+
+	t_stack *newHead = NULL, *newEnd = NULL;
+
+	// Partition the list, newHead and newEnd will be updated
+	// by the partition function
+	t_stack *pivot = partition(head, end, &newHead, &newEnd);
+
+	// If pivot is the smallest element - no need to recur for
+	// the left part.
+	if (newHead != pivot)
+	{
+		// Set the node before the pivot node as NULL
+		t_stack *tmp = newHead;
+		while (tmp->next != pivot)
+			tmp = tmp->next;
+		tmp->next = NULL;
+
+		// Recur for the list before pivot
+		newHead = quickSortRecur(newHead, tmp);
+
+		// Change next of last node of the left half to pivot
+		tmp = getTail(newHead);
+		tmp->next =  pivot;
+	}
+
+	// Recur for the list after the pivot element
+	pivot->next = quickSortRecur(pivot->next, newEnd);
+
+	return newHead;
+}
+
+// The main function for quick sort. This is a wrapper over recursive
+// function quickSortRecur()
+void quickSort(t_stack **headRef)
+{
+	(*headRef) = quickSortRecur(*headRef, getTail(*headRef));
+	return;
+}
+
+
+
 
 t_stack	*find_min_in_stack(t_stack *stack)
 {
@@ -155,34 +257,34 @@ char*	bublesort(t_stack **sta, t_stack **stb, char *cmds)
 
 
 
-int partition (int arr[], int l, int h)
+/*int partition (int arr[], int b, int e)
 {
-	int x = arr[h];
-	int i = (l - 1);
+	int x = arr[e];
+	int i = (b - 1);
 
-	for (int j = l; j <= h- 1; j++)
+	for (int j = b; j <= e - 1; j++)
 	{
 		if (arr[j] <= x)
 		{
 			i++;
 			ft_swap (&arr[i], &arr[j]);
 		}
-		ft_putarr(arr, h + 1, ' ');
 	}
-	ft_swap (&arr[i + 1], &arr[h]);
+	ft_swap (&arr[i + 1], &arr[e]);
+	ft_putarr(arr, e + 1, ' ');
 	return (i + 1);
 }
 
-/* A[] --> Array to be sorted, l  --> Starting index, h  --> Ending index */
-void quickSort(int A[], int l, int h)
+
+void quickSort(int A[], int b, int e)
 {
-	if (l < h)
+	if (b < e)
 	{
-		int p = partition(A, l, h); /* Partitioning index */
-		quickSort(A, l, p - 1);
-		quickSort(A, p + 1, h);
+		int p = partition(A, b, e);
+		quickSort(A, b, p - 1);
+		quickSort(A, p + 1, e);
 	}
-}
+}*/
 
 
 
@@ -210,7 +312,7 @@ int 	main(int ac, char **av)
 	t_stack *stackb;
 	int 	fd;
 	char 	*cmds;
-	//int 	*mas;
+	int 	*mas;
 
 	stacka = NULL;
 	stackb = NULL;
@@ -229,23 +331,27 @@ int 	main(int ac, char **av)
 	}
 	else
 		datatostack(ac - 1, 0, av, &stacka);
-	//print_stack(stacka, stackb);
+	print_stack(stacka, stackb);
 
 
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
-		cmds = selection_sort(&stacka, &stackb, cmds);
+		quickSort(&stacka);
+		/*cmds = selection_sort(&stacka, &stackb, cmds);*/
 		/*while (!is_sorted(stacka))
 			cmds = bublesort(&stacka, &stackb, cmds);*/
 
-	ft_putstr(cmds);
-	//print_stack(stacka, stackb);
-
+	//ft_putstr(cmds);
+	ft_putstr("\n\n");
+	print_stack(stacka, stackb);
+	if (is_sorted(stacka))
+		ft_putstr("Stack is sorted");
 
 	/*stack ----> arr for qsort
 	 *
-	 * int maslen = lstlen(stacka);
+	 * */
+/*	int maslen = lstlen(stacka);
 
 	if(!(mas = ft_arrnew(maslen)))
 		return (1);
