@@ -114,7 +114,21 @@ void quickSort(t_stack **headRef)
 	return;
 }
 
+int		find_min_val_stack(t_stack *stack)
+{
+	t_stack	*min_el;
 
+	if (!stack)
+		return (NULL);
+	min_el = stack;
+	while (stack)
+	{
+		if (min_el->cont > stack->cont)
+			min_el = stack;
+		stack = stack->next;
+	}
+	return (min_el->cont);
+}
 
 
 t_stack	*find_min_in_stack(t_stack *stack)
@@ -306,6 +320,15 @@ int		lstlen(t_stack *stack)
 	return (i);
 }
 
+
+char	*median_sort(t_stack **sta, t_stack **stb, char *cmds)
+{
+	int		avg;
+	t_stack	*tmpa;
+
+	return 0;
+}
+
 int 	main(int ac, char **av)
 {
 	t_stack *stacka;
@@ -337,12 +360,13 @@ int 	main(int ac, char **av)
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
+		//median_sort(&stacka, &stackb, cmds);
 		quickSort(&stacka);
-		/*cmds = selection_sort(&stacka, &stackb, cmds);*/
+		//cmds = selection_sort(&stacka, &stackb, cmds);
 		/*while (!is_sorted(stacka))
 			cmds = bublesort(&stacka, &stackb, cmds);*/
 
-	//ft_putstr(cmds);
+	ft_putstr(cmds);
 	ft_putstr("\n\n");
 	print_stack(stacka, stackb);
 	if (is_sorted(stacka))
