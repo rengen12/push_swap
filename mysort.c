@@ -14,9 +14,9 @@
 
 void	rewrite_mas(t_stack **mas, t_stack *last)
 {
-	mas[2] = mas[1];
-	mas[1] = mas[0];
-	mas[0] = last;
+	mas[0] = mas[1];
+	mas[1] = mas[2];
+	mas[2] = last;
 }
 
 void	prep_vars(t_stack **mas1, t_stack **mas2, int *i)
@@ -99,7 +99,7 @@ int		create_cmp_arr(t_stack *st, t_stack **min)
 		st = st->next;
 		p_down[i++] = st;
 	}
-	while (st->next)
+	while (st)
 	{
 		st = st->next;
 		rewrite_mas(p_up, st);
@@ -107,17 +107,24 @@ int		create_cmp_arr(t_stack *st, t_stack **min)
 	return (find_min_arr(min, p_down, p_up));
 }
 
-void	rotate_b(t_stack **stb, int rx, int rrx)
+char	*rotate_b(t_stack **stb, int rx, int rrx, char *cmds)
 {
 	if (rrx < rx)
 		while (rrx-- > 0)
+		{
 			rrb(stb);
+			cmds = ft_strjoin(cmds, "rrb\n");
+		}
 	else
 		while (rx-- > 0)
+		{
 			rb(stb);
+			cmds = ft_strjoin(cmds, "rb\n");
+		}
+	return (cmds);
 }
 
-void	paste_in_tail(t_stack **sta, t_stack **stb, int to_find)
+char	*paste_in_tail(t_stack **stb, int to_find, char *cmds)
 {
 	t_stack *tmp;
 	int 	rx;
@@ -131,22 +138,24 @@ void	paste_in_tail(t_stack **sta, t_stack **stb, int to_find)
 		rx++;
 		tmp = tmp->next;
 	}
-	while (tmp)
+	/*if (tmp && tmp->next)
+		tmp = tmp->next;*/
+	while (tmp && tmp->next)
 	{
 		rrx++;
 		tmp = tmp->next;
 	}
-	rotate_b(stb, rx, rrx);
+	return (rotate_b(stb, rx, rrx, cmds));
 }
 
-void	paste_in_head(t_stack **sta, t_stack **stb, int to_find)
+char	*paste_in_head(t_stack **stb, int to_find, char *cmds)
 {
 	t_stack *tmp;
 	int 	rx;
 	int 	rrx;
 
 	rx = 0;
-	rrx = 1;
+	rrx = 0;
 	tmp = *stb;
 	while (tmp && tmp->cont != to_find)
 	{
@@ -158,7 +167,7 @@ void	paste_in_head(t_stack **sta, t_stack **stb, int to_find)
 		rrx++;
 		tmp = tmp->next;
 	}
-	rotate_b(stb, rx, rrx);
+	return (rotate_b(stb, rx, rrx, cmds));
 	//pb(sta, stb);
 	//rb(stb); //disable
 }
@@ -186,16 +195,16 @@ void	paste_in_head(t_stack **sta, t_stack **stb, int to_find)
 		return (0);
 }*/
 
-void	paste_in_body(t_stack **sta, t_stack **stb, int min)
+char	*paste_in_body(t_stack **sta, t_stack **stb, int min, char *cmds)
 {
 	t_stack *tmp;
 	int 	rx;
 	int 	rrx;
 
 	rx = 0;
-	rrx = 1;
+	rrx = 0;
 	tmp = *stb;
-	while (tmp && tmp->cont)
+	while (tmp)
 	{
 		if (min <= tmp->cont && tmp->cont < (*sta)->cont)
 			min = tmp->cont;
@@ -212,37 +221,42 @@ void	paste_in_body(t_stack **sta, t_stack **stb, int min)
 		rrx++;
 		tmp = tmp->next;
 	}
-	rotate_b(stb, rx, rrx);
-	pb(sta, stb);
+	return (rotate_b(stb, rx, rrx, cmds));
 	//rb(stb);//disable
 	//rb(stb);//disable
 }
 
-void	insert_stb(t_stack **sta, t_stack **stb, int *extval)
+char	*insert_stb(t_stack **sta, t_stack **stb, int *extval, char *cmds)
 {
 	if (!*stb)
 	{
 		pb(sta, stb);
+		cmds = ft_strjoin(cmds, "pb\n");
 		extval[0] = (*stb)->cont;
 		extval[1] = (*stb)->cont;
 	}
 	else if ((*sta)->cont < extval[0]) //lover minimal
 	{
-		paste_in_tail(sta, stb, extval[0]);
+		cmds = paste_in_tail(stb, extval[0], cmds);
 		pb(sta, stb);
+		cmds = ft_strjoin(cmds, "pb\n");
 		extval[0] = (*stb)->cont;
 	}
 	else if ((*sta)->cont > extval[1]) //bigger biggest
 	{
-		paste_in_head(sta, stb, extval[1]);
+		cmds = paste_in_head(stb, extval[1], cmds);
 		pb(sta, stb);
+		cmds = ft_strjoin(cmds, "pb\n");
 		extval[1] = (*stb)->cont;
 	}
 	else
 	{
-		paste_in_body(sta, stb, extval[0]);
+		cmds = paste_in_body(sta, stb, extval[0], cmds);
+		pb(sta, stb);
+		cmds = ft_strjoin(cmds, "pb\n");
 		//choose_direct_rot_f_insert(*stb, (*sta)->cont);
 	}
+	return (cmds);
 }
 
 t_stack *getlast(t_stack *cur)
@@ -252,29 +266,47 @@ t_stack *getlast(t_stack *cur)
 	return (cur);
 }
 
-char 	*mysort(t_stack **sta, t_stack **stb)
+char 	*mysort(t_stack **sta, t_stack **stb, char *cmds)
 {
 	t_stack *min;
 	int		qel;
-	int 	i;
+	//int 	i;
 	int 	extval[2];
-
-	i = 0;
-	/*while (*sta)
+/*i++ < ABS(qel)*/
+	while (*sta)
 	{
+		//i = 0;
 		qel = create_cmp_arr(*sta, &min);
-		while (i++ < ABS(qel))
+		while (*sta != min)
 		{
 			if (qel < 0)
+			{
 				rra(sta);
+				cmds = ft_strjoin(cmds, "rra\n");
+			}
 			else
+			{
 				ra(sta);
+				cmds = ft_strjoin(cmds, "ra\n");
+			}
 		}
-		insert_stb(sta, stb, extval);
-		print_stack(*sta, *stb);
-	}*/
-	paste_in_tail(sta, stb, -20438801);
-	print_stack(*sta, *stb);
-	/*while (*stb)
-		pa(sta, stb);*/
+		if (!qel)
+			qel = 1;
+		while (qel)
+		{
+			cmds = insert_stb(sta, stb, extval, cmds);
+			if (qel < 0)
+				qel++;
+			else
+				qel--;
+		}
+		//print_stack(*sta, *stb);
+	}
+	cmds = paste_in_head(stb, extval[1], cmds);
+	while (*stb)
+	{
+		pa(sta, stb);
+		cmds = ft_strjoin(cmds, "pa\n");
+	}
+	return (cmds);
 }

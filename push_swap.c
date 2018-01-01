@@ -119,7 +119,7 @@ int		find_min_val_stack(t_stack *stack)
 	t_stack	*min_el;
 
 	if (!stack)
-		return (NULL);
+		return (0);
 	min_el = stack;
 	while (stack)
 	{
@@ -320,13 +320,23 @@ int		lstlen(t_stack *stack)
 	return (i);
 }
 
-
-char	*median_sort(t_stack **sta, t_stack **stb, char *cmds)
+char	*cutstring(char **orig, char *start, char *todelete, char *paste)
 {
-	int		avg;
-	t_stack	*tmpa;
 
-	return 0;
+	if (start)
+	{
+
+
+
+	}
+}
+
+char	*opt_cmds(char *cmds)
+{
+	char *res;
+	res = cutstring(cmds, ft_strstr(&cmds, "ra\nrb\n"), "ra\nrb\n")
+	ft_putstr(new);
+
 }
 
 int 	main(int ac, char **av)
@@ -335,7 +345,7 @@ int 	main(int ac, char **av)
 	t_stack *stackb;
 	int 	fd;
 	char 	*cmds;
-	int 	*mas;
+	//int 	*mas;
 
 	stacka = NULL;
 	stackb = NULL;
@@ -354,13 +364,13 @@ int 	main(int ac, char **av)
 	}
 	else
 		datatostack(ac - 1, 0, av, &stacka);
-	print_stack(stacka, stackb);
+	//print_stack(stacka, stackb);
 
 
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
-		mysort(&stacka, &stackb);
+		cmds = mysort(&stacka, &stackb, cmds);
 		//median_sort(&stacka, &stackb, cmds);
 		//quickSort(&stacka);
 		//cmds = selection_sort(&stacka, &stackb, cmds);
@@ -368,10 +378,14 @@ int 	main(int ac, char **av)
 			cmds = bublesort(&stacka, &stackb, cmds);*/
 
 	//ft_putstr(cmds);
-	ft_putstr("\n\n");
-	//print_stack(stacka, stackb);
-	/*if (is_sorted(stacka))
+	cmds = opt_cmds(cmds);
+	/*ft_putstr("\n\n");
+	print_stack(stacka, stackb);
+	if (is_sorted(stacka))
 		ft_putstr("Stack is sorted");*/
+
+
+
 
 	/*stack ----> arr for qsort
 	 *
