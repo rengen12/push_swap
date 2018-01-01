@@ -360,17 +360,18 @@ int 	main(int ac, char **av)
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
+		mysort(&stacka, &stackb);
 		//median_sort(&stacka, &stackb, cmds);
-		quickSort(&stacka);
+		//quickSort(&stacka);
 		//cmds = selection_sort(&stacka, &stackb, cmds);
 		/*while (!is_sorted(stacka))
 			cmds = bublesort(&stacka, &stackb, cmds);*/
 
-	ft_putstr(cmds);
+	//ft_putstr(cmds);
 	ft_putstr("\n\n");
-	print_stack(stacka, stackb);
-	if (is_sorted(stacka))
-		ft_putstr("Stack is sorted");
+	//print_stack(stacka, stackb);
+	/*if (is_sorted(stacka))
+		ft_putstr("Stack is sorted");*/
 
 	/*stack ----> arr for qsort
 	 *
@@ -394,6 +395,7 @@ int 	main(int ac, char **av)
 	quickSort(mas, 0, maslen - 1);
 	ft_putarr(mas, maslen, ' ');
 	free(mas);*/
+
 	delete_stack(&stacka);
 	delete_stack(&stackb);
 	return (0);
