@@ -58,6 +58,8 @@ int 	main(int ac, char **av)
 	if (ac == 3 && !ft_strcmp(av[1], "-f"))
 	{
 		fd = open(av[2], O_RDONLY);
+		if (fd == -1)
+			ft_delete_exit("File not exist", &stacka);
 		while (get_next_line(fd, av) > 0)
 			datatostack(0, 1, av, &stackb);
 		while(stackb)
@@ -72,5 +74,7 @@ int 	main(int ac, char **av)
 		ft_putendl("OK");
 	else
 		ft_putendl("KO");
+	delete_stack(&stacka);
+	delete_stack(&stackb);
 	return (0);
 }

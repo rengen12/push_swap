@@ -307,20 +307,9 @@ void quickSort(int A[], int b, int e)
 
 
 
-int		lstlen(t_stack *stack)
-{
-	int 	i;
 
-	i = 0;
-	while (stack)
-	{
-		i++;
-		stack = stack->next;
-	}
-	return (i);
-}
 
-char	*cutstring(char **orig, char *start, char *todelete, char *paste)
+/*char	*cutstring(char **orig, char *start, char *todelete, char *paste)
 {
 
 	if (start)
@@ -337,7 +326,7 @@ char	*opt_cmds(char *cmds)
 	res = cutstring(cmds, ft_strstr(&cmds, "ra\nrb\n"), "ra\nrb\n")
 	ft_putstr(new);
 
-}
+}*/
 
 int 	main(int ac, char **av)
 {
@@ -370,15 +359,16 @@ int 	main(int ac, char **av)
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
-		cmds = mysort(&stacka, &stackb, cmds);
+		ft_qsort(&stacka, &stackb, &cmds);
+		//cmds = mysort(&stacka, &stackb, cmds);
 		//median_sort(&stacka, &stackb, cmds);
 		//quickSort(&stacka);
 		//cmds = selection_sort(&stacka, &stackb, cmds);
 		/*while (!is_sorted(stacka))
 			cmds = bublesort(&stacka, &stackb, cmds);*/
 
-	//ft_putstr(cmds);
-	cmds = opt_cmds(cmds);
+	ft_putstr(cmds);
+	//cmds = opt_cmds(cmds);
 	/*ft_putstr("\n\n");
 	print_stack(stacka, stackb);
 	if (is_sorted(stacka))

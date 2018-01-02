@@ -266,13 +266,152 @@ t_stack *getlast(t_stack *cur)
 	return (cur);
 }
 
+int		lstlen(t_stack *stack)
+{
+	int 	i;
+
+	i = 0;
+	while (stack)
+	{
+		i++;
+		stack = stack->next;
+	}
+	return (i);
+}
+
+int 	find_min_val(t_stack *st)
+{
+	int 	min;
+
+	if (!st)
+		return (0);
+	min = st->cont;
+	while (st)
+	{
+		if (st->cont <  min)
+			min = st->cont;
+		st = st->next;
+	}
+	return (min);
+}
+
+int 	find_max_val(t_stack *st)
+{
+	int 	max;
+
+	if (!st)
+		return (0);
+	max = st->cont;
+	while (st)
+	{
+		if (st->cont >  max)
+			max = st->cont;
+		st = st->next;
+	}
+	return (max);
+}
+
+void	swap_st_cont(int *a, int *b)
+{
+	int 	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+t_stack *buble_sort_st(t_stack *st, int q)
+{
+	int	i;
+	int y;
+	t_stack *head;
+
+	i = 0;
+	head = st;
+	while (i < q - 1)
+	{
+		y = 0;
+		while (y < q - i - 1)
+		{
+			if (st->cont > st->next->cont)
+				swap_st_cont(&st->cont, &st->next->cont);
+			y++;
+			st = st->next;
+		}
+		i++;
+		st = head;
+	}
+	return (st);
+}
+
+int		find_av_val(t_stack *st, int qel)
+{
+	int 	i;
+
+	i = 0;
+	st = buble_sort_st(st, qel);
+	while (i < qel / 2)
+	{
+		st = st->next;
+		i++;
+	}
+	return (st->cont);
+}
+
+int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
+{
+	int 	av_val;
+	int 	moved;
+
+	moved = 0;
+	av_val = find_av_val(*sta, qel);
+	while (qel--)
+		if ((*sta)->cont < av_val)
+		{
+			pb(sta, stb);
+			moved++;
+			*cmds = ft_strjoin(*cmds, "pb\n");
+		}
+		else
+		{
+			ra(sta);
+			*cmds = ft_strjoin(*cmds, "ra\n");
+		}
+	return (moved);
+}
+
+void	ft_qsort(t_stack **sta, t_stack **stb, char **cmds)
+{
+	int moved;
+	int	qel;
+
+	qel = lstlen(*sta);
+	moved = push_half_to_b(sta, stb, cmds, qel);
+}
+
 char 	*mysort(t_stack **sta, t_stack **stb, char *cmds)
 {
 	t_stack *min;
-	int		qel;
-	//int 	i;
+	int 	qel;
 	int 	extval[2];
+	//int 	lsthalf;
+	int 	i;
+	int 	moved;
 /*i++ < ABS(qel)*/
+
+	//lsthalf = lstlen(*sta) / 2;
+	/*while (lsthalf)
+	{
+		pb(sta, stb);
+		cmds = ft_strjoin(cmds, "pb\n");
+		lsthalf--;
+	}
+	extval[0] = find_min_val(*stb);
+	extval[1] = find_max_val(*stb);*/
+
+
+
+
 	while (*sta)
 	{
 		//i = 0;
