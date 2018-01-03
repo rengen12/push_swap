@@ -22,7 +22,7 @@ t_stack *getTail(t_stack *cur)
 	return (cur);
 }
 
-// Partitions the list taking the last element as the pivot
+/*// Partitions the list taking the last element as the pivot
 t_stack *partition(t_stack *head, t_stack *end,
 					   t_stack **newHead, t_stack **newEnd)
 {
@@ -112,7 +112,7 @@ void quickSort(t_stack **headRef)
 {
 	(*headRef) = quickSortRecur(*headRef, getTail(*headRef));
 	return;
-}
+}*/
 
 int		find_min_val_stack(t_stack *stack)
 {
@@ -271,11 +271,13 @@ char*	bublesort(t_stack **sta, t_stack **stb, char *cmds)
 
 
 
-/*int partition (int arr[], int b, int e)
+int partition (int arr[], int b, int e)
 {
 	int x = arr[e];
 	int i = (b - 1);
-
+	ft_putendl("in partition. Mas orig mas");
+	ft_putarr(arr, 10, ' ');
+	ft_putendl("operations");
 	for (int j = b; j <= e - 1; j++)
 	{
 		if (arr[j] <= x)
@@ -283,9 +285,12 @@ char*	bublesort(t_stack **sta, t_stack **stb, char *cmds)
 			i++;
 			ft_swap (&arr[i], &arr[j]);
 		}
+		ft_putarr(arr, 10, ' ');
 	}
 	ft_swap (&arr[i + 1], &arr[e]);
-	ft_putarr(arr, e + 1, ' ');
+	ft_putendl("mas after cycle");
+	ft_putarr(arr, 10, ' ');
+	ft_putendl("");
 	return (i + 1);
 }
 
@@ -295,10 +300,12 @@ void quickSort(int A[], int b, int e)
 	if (b < e)
 	{
 		int p = partition(A, b, e);
+		ft_putendl("first");
 		quickSort(A, b, p - 1);
+		ft_putendl("second");
 		quickSort(A, p + 1, e);
 	}
-}*/
+}
 
 
 
@@ -327,6 +334,32 @@ char	*opt_cmds(char *cmds)
 	ft_putstr(new);
 
 }*/
+//-8119124 -3873710 2278516 40158649 54157143 59938666 108535001 129505786 207821177 213156669
+//-8119124 -3873710 2278516 40158649 54157143 59938666 108535001 129505786 207821177 213156669
+int 	mypartition(int arr[], int b, int e)
+{
+	int	x = arr[e];
+	int i = (b - 1);
+	int j = b;
+	while (j < e)
+	{
+		if (arr[j] < x)
+			ft_swap(&arr[++i], &arr[j]);
+		j++;
+	}
+	ft_swap(&arr[i + 1], &arr[e]);
+	return (i + 1);
+}
+
+void	myquicksort(int arr[], int b, int e)
+{
+	if (b < e)
+	{
+		int p = mypartition(arr, b, e);
+		myquicksort(arr, b, p - 1);
+		myquicksort(arr, p + 1, e);
+	}
+}
 
 int 	main(int ac, char **av)
 {
@@ -334,7 +367,7 @@ int 	main(int ac, char **av)
 	t_stack *stackb;
 	int 	fd;
 	char 	*cmds;
-	//int 	*mas;
+	int 	*mas;
 
 	stacka = NULL;
 	stackb = NULL;
@@ -356,10 +389,10 @@ int 	main(int ac, char **av)
 	//print_stack(stacka, stackb);
 
 
-	if (is_sorted(stacka))
+	/*if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
-		ft_qsort(&stacka, &stackb, &cmds);
+		ft_qsort(&stacka, &stackb, &cmds);*/
 		//cmds = mysort(&stacka, &stackb, cmds);
 		//median_sort(&stacka, &stackb, cmds);
 		//quickSort(&stacka);
@@ -367,7 +400,7 @@ int 	main(int ac, char **av)
 		/*while (!is_sorted(stacka))
 			cmds = bublesort(&stacka, &stackb, cmds);*/
 
-	ft_putstr(cmds);
+	//ft_putstr(cmds);
 	//cmds = opt_cmds(cmds);
 	/*ft_putstr("\n\n");
 	print_stack(stacka, stackb);
@@ -380,7 +413,7 @@ int 	main(int ac, char **av)
 	/*stack ----> arr for qsort
 	 *
 	 * */
-/*	int maslen = lstlen(stacka);
+	int maslen = lstlen(stacka);
 
 	if(!(mas = ft_arrnew(maslen)))
 		return (1);
@@ -395,10 +428,10 @@ int 	main(int ac, char **av)
 		tmphead = tmphead->next;
 	}
 	ft_putarr(mas, maslen, ' ');
-
+	//myquicksort(mas, 0, maslen - 1);
 	quickSort(mas, 0, maslen - 1);
 	ft_putarr(mas, maslen, ' ');
-	free(mas);*/
+	free(mas);
 
 	delete_stack(&stacka);
 	delete_stack(&stackb);
