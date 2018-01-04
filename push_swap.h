@@ -27,5 +27,7 @@ char 	*mysort(t_stack **sta, t_stack **stb, char *cmds);
 int		choose_direct_rot(t_stack *stack, t_stack *min);
 
 void	ft_qsort(t_stack **sta, t_stack **stb, char **cmds);
+int 	is_sorted_n(t_stack *st, int n);
+int 	is_sorted_rev(t_stack *st);
 
 #endif

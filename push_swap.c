@@ -162,10 +162,10 @@ char*	bublesort(t_stack **sta, t_stack **stb, char *cmds)
 
 
 
-
+/*
 // qsort for array
 //
-/*int partition (int arr[], int b, int e)
+int partition (int arr[], int b, int e)
 {
 	int x = arr[e];
 	int i = (b - 1);
@@ -199,6 +199,8 @@ void quickSort(int A[], int b, int e)
 		ft_putendl("second");
 		quickSort(A, p + 1, e);
 	}
+	else
+		ft_putendl("pb");
 }*/
 
 
@@ -218,6 +220,8 @@ char	*opt_cmds(char *cmds)
 	ft_putstr(new);
 
 }*/
+
+/*
 //-8119124 -3873710 2278516 40158649 54157143 59938666 108535001 129505786 207821177 213156669
 //-8119124 -3873710 2278516 40158649 54157143 59938666 108535001 129505786 207821177 213156669
 int 	mypartition(int arr[], int b, int e)
@@ -244,7 +248,7 @@ void	myquicksort(int arr[], int b, int e)
 		myquicksort(arr, p + 1, e);
 	}
 }
-
+*/
 
 
 
@@ -346,8 +350,71 @@ void quickSort(t_stack **headRef)
 	(*headRef) = quickSortRecur(*headRef, getTail(*headRef));
 }
 
-void	myqsort_stack(t_stack *a, t_stack *b)
+
+
+/* DRAFT */
+
+t_stack	*get_tail(t_stack *head)
 {
+	if (head)
+		while (head->next)
+			head = head->next;
+	return (head);
+}
+
+/*t_stack	*partiton(t_stack **a, t_stack **b)
+{
+	t_stack *pivot;
+	t_stack *cur;
+
+	pb(a, b);
+	pivot = *b;
+	cur = *a;
+	while (cur)
+	{
+
+		cur = cur->next;
+	}
+
+}*/
+
+t_stack *mypartition(t_stack **a, t_stack **b, t_stack **newhead)
+{
+	t_stack *end;
+
+	end = get_tail(*a);
+	while (*a != end)
+	{
+		if ((*a)->cont < end->cont)
+			ra(a);
+		else
+			pb(a, b);
+	}
+	/*while (*a != pivot)
+	{
+		if ((*a)->cont > pivot->cont)
+		{
+			pb(a, b);
+		}
+		else
+			rb(a);
+	}*/
+	return (end);
+}
+
+t_stack	*myqsort_rec(t_stack **a, t_stack **b)
+{
+	t_stack *pivot;
+	t_stack	*newhead;
+	pivot = mypartition(a, b, &newhead);
+	print_stack(*a, *b);
+	myqsort_rec(b, a);
+
+}
+
+void	myqsort_stack(t_stack **a, t_stack **b)
+{
+	myqsort_rec(a, b);
 
 }
 
@@ -376,13 +443,14 @@ int 	main(int ac, char **av)
 	}
 	else
 		datatostack(ac - 1, 0, av, &stacka);
-	//print_stack(stacka, stackb);
+	print_stack(stacka, stackb);
 
 
-	/*if (is_sorted(stacka))
+	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
-		ft_qsort(&stacka, &stackb, &cmds);*/
+		myqsort_stack(&stacka, &stackb);
+		//ft_qsort(&stacka, &stackb, &cmds);
 		//cmds = mysort(&stacka, &stackb, cmds);
 		//median_sort(&stacka, &stackb, cmds);
 		//quickSort(&stacka);
@@ -392,10 +460,10 @@ int 	main(int ac, char **av)
 
 	//ft_putstr(cmds);
 	//cmds = opt_cmds(cmds);
-	/*ft_putstr("\n\n");
+	ft_putstr("\n\n");
 	print_stack(stacka, stackb);
 	if (is_sorted(stacka))
-		ft_putstr("Stack is sorted");*/
+		ft_putstr("Stack is sorted");
 
 
 
@@ -419,7 +487,7 @@ int 	main(int ac, char **av)
 	}
 	ft_putarr(mas, maslen, ' ');
 	//myquicksort(mas, 0, maslen - 1);
-	quickSort(mas, 0, maslen - 1);
+	//quickSort(mas, 0, maslen - 1);
 	ft_putarr(mas, maslen, ' ');
 	free(mas);*/
 

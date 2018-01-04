@@ -361,15 +361,15 @@ int		find_av_val(t_stack *st, int qel)
 int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
 {
 	int 	av_val;
-	int 	moved;
+	int 	to_move;
 
-	moved = 0;
+	to_move = 0;
 	av_val = find_av_val(*sta, qel);
 	while (qel--)
 		if ((*sta)->cont < av_val)
 		{
 			pb(sta, stb);
-			moved++;
+			to_move++;
 			*cmds = ft_strjoin(*cmds, "pb\n");
 		}
 		else
@@ -377,16 +377,29 @@ int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
 			ra(sta);
 			*cmds = ft_strjoin(*cmds, "ra\n");
 		}
-	return (moved);
+	return (to_move);
 }
 
-void	ft_qsort(t_stack **sta, t_stack **stb, char **cmds)
+void	ft_qsort(t_stack **a, t_stack **b, char **cmds)
 {
-	int moved;
-	int	qel;
+	//int moved;
+	//int	qel;
+	t_stack *pivot;
 
-	qel = lstlen(*sta);
-	moved = push_half_to_b(sta, stb, cmds, qel);
+	//qel = lstlen(*a);
+	//moved = push_half_to_b(a, b, cmds, qel);
+	pivot = *a;
+	pb(a, b);
+	while (!is_sorted(*a))
+		if (*a && (*a)->cont < pivot->cont)
+		{
+			rb(a);
+
+		}
+		else
+		{
+			pb(a, b);
+		}
 }
 
 char 	*mysort(t_stack **sta, t_stack **stb, char *cmds)
