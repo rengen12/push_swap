@@ -14,106 +14,6 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-// Returns the last node of the list
-t_stack *getTail(t_stack *cur)
-{
-	while (cur != NULL && cur->next != NULL)
-		cur = cur->next;
-	return (cur);
-}
-
-/*// Partitions the list taking the last element as the pivot
-t_stack *partition(t_stack *head, t_stack *end,
-					   t_stack **newHead, t_stack **newEnd)
-{
-	t_stack *pivot = end;
-	t_stack *prev = NULL, *cur = head, *tail = pivot;
-
-	// During partition, both the head and end of the list might change
-	// which is updated in the newHead and newEnd variables
-	while (cur != pivot)
-	{
-		if (cur->cont < pivot->cont)
-		{
-			// First node that has a value less than the pivot - becomes
-			// the new head
-			if ((*newHead) == NULL)
-				(*newHead) = cur;
-
-			prev = cur;
-			cur = cur->next;
-		}
-		else // If cur node is greater than pivot
-		{
-			// Move cur node to next of tail, and change tail
-			if (prev)
-				prev->next = cur->next;
-			t_stack *tmp = cur->next;
-			cur->next = NULL;
-			tail->next = cur;
-			tail = cur;
-			cur = tmp;
-		}
-	}
-
-	// If the pivot data is the smallest element in the current list,
-	// pivot becomes the head
-	if ((*newHead) == NULL)
-		(*newHead) = pivot;
-
-	// Update newEnd to the current last node
-	(*newEnd) = tail;
-
-	// Return the pivot node
-	return pivot;
-}
-
-
-//here the sorting happens exclusive of the end node
-t_stack *quickSortRecur(t_stack *head, t_stack *end)
-{
-	// base condition
-	if (!head || head == end)
-		return head;
-
-	t_stack *newHead = NULL, *newEnd = NULL;
-
-	// Partition the list, newHead and newEnd will be updated
-	// by the partition function
-	t_stack *pivot = partition(head, end, &newHead, &newEnd);
-
-	// If pivot is the smallest element - no need to recur for
-	// the left part.
-	if (newHead != pivot)
-	{
-		// Set the node before the pivot node as NULL
-		t_stack *tmp = newHead;
-		while (tmp->next != pivot)
-			tmp = tmp->next;
-		tmp->next = NULL;
-
-		// Recur for the list before pivot
-		newHead = quickSortRecur(newHead, tmp);
-
-		// Change next of last node of the left half to pivot
-		tmp = getTail(newHead);
-		tmp->next =  pivot;
-	}
-
-	// Recur for the list after the pivot element
-	pivot->next = quickSortRecur(pivot->next, newEnd);
-
-	return newHead;
-}
-
-// The main function for quick sort. This is a wrapper over recursive
-// function quickSortRecur()
-void quickSort(t_stack **headRef)
-{
-	(*headRef) = quickSortRecur(*headRef, getTail(*headRef));
-	return;
-}*/
-
 int		find_min_val_stack(t_stack *stack)
 {
 	t_stack	*min_el;
@@ -129,7 +29,6 @@ int		find_min_val_stack(t_stack *stack)
 	}
 	return (min_el->cont);
 }
-
 
 t_stack	*find_min_in_stack(t_stack *stack)
 {
@@ -261,17 +160,12 @@ char*	bublesort(t_stack **sta, t_stack **stb, char *cmds)
 
 //printf_num_l(cmds);
 
-/*char *quicksort(t_stack **stacka, t_stack **stackb, char *cmds)
-{
-
-}*/
 
 
 
-
-
-
-int partition (int arr[], int b, int e)
+// qsort for array
+//
+/*int partition (int arr[], int b, int e)
 {
 	int x = arr[e];
 	int i = (b - 1);
@@ -305,15 +199,7 @@ void quickSort(int A[], int b, int e)
 		ft_putendl("second");
 		quickSort(A, p + 1, e);
 	}
-}
-
-
-
-
-
-
-
-
+}*/
 
 
 /*char	*cutstring(char **orig, char *start, char *todelete, char *paste)
@@ -321,8 +207,6 @@ void quickSort(int A[], int b, int e)
 
 	if (start)
 	{
-
-
 
 	}
 }
@@ -361,13 +245,119 @@ void	myquicksort(int arr[], int b, int e)
 	}
 }
 
+
+
+
+// Returns the last node of the list
+t_stack *getTail(t_stack *cur)
+{
+	while (cur != NULL && cur->next != NULL)
+		cur = cur->next;
+	return (cur);
+}
+
+// Partitions the list taking the last element as the pivot
+t_stack *partition(t_stack *head, t_stack *end,
+				   t_stack **newHead, t_stack **newEnd)
+{
+	t_stack *pivot = end;
+	t_stack *prev = NULL, *cur = head, *tail = pivot;
+
+	// During partition, both the head and end of the list might change
+	// which is updated in the newHead and newEnd variables
+	while (cur != pivot)
+	{
+		if (cur->cont < pivot->cont)
+		{
+			// First node that has a value less than the pivot - becomes
+			// the new head
+			if ((*newHead) == NULL)
+				(*newHead) = cur;
+
+			prev = cur;
+			cur = cur->next;
+		}
+		else // If cur node is greater than pivot
+		{
+			// Move cur node to next of tail, and change tail
+			if (prev)
+				prev->next = cur->next;
+			t_stack *tmp = cur->next;
+			cur->next = NULL;
+			tail->next = cur;
+			tail = cur;
+			cur = tmp;
+		}
+	}
+
+	// If the pivot data is the smallest element in the current list,
+	// pivot becomes the head
+	if ((*newHead) == NULL)
+		(*newHead) = pivot;
+
+	// Update newEnd to the current last node
+	(*newEnd) = tail;
+
+	// Return the pivot node
+	return pivot;
+}
+
+
+//here the sorting happens exclusive of the end node
+t_stack *quickSortRecur(t_stack *head, t_stack *end)
+{
+	// base condition
+	if (!head || head == end)
+		return head;
+
+	t_stack *newHead = NULL, *newEnd = NULL;
+
+	// Partition the list, newHead and newEnd will be updated
+	// by the partition function
+	t_stack *pivot = partition(head, end, &newHead, &newEnd);
+
+	// If pivot is the smallest element - no need to recur for
+	// the left part.
+	if (newHead != pivot)
+	{
+		// Set the node before the pivot node as NULL
+		t_stack *tmp = newHead;
+		while (tmp->next != pivot)
+			tmp = tmp->next;
+		tmp->next = NULL;
+
+		// Recur for the list before pivot
+		newHead = quickSortRecur(newHead, tmp);
+
+		// Change next of last node of the left half to pivot
+		tmp = getTail(newHead);
+		tmp->next =  pivot;
+	}
+
+	// Recur for the list after the pivot element
+	pivot->next = quickSortRecur(pivot->next, newEnd);
+	return newHead;
+}
+
+// The main function for quick sort. This is a wrapper over recursive
+// function quickSortRecur()
+void quickSort(t_stack **headRef)
+{
+	(*headRef) = quickSortRecur(*headRef, getTail(*headRef));
+}
+
+void	myqsort_stack(t_stack *a, t_stack *b)
+{
+
+}
+
 int 	main(int ac, char **av)
 {
 	t_stack *stacka;
 	t_stack *stackb;
 	int 	fd;
 	char 	*cmds;
-	int 	*mas;
+	//int 	*mas;
 
 	stacka = NULL;
 	stackb = NULL;
@@ -413,7 +403,7 @@ int 	main(int ac, char **av)
 	/*stack ----> arr for qsort
 	 *
 	 * */
-	int maslen = lstlen(stacka);
+	/*int maslen = lstlen(stacka);
 
 	if(!(mas = ft_arrnew(maslen)))
 		return (1);
@@ -431,7 +421,7 @@ int 	main(int ac, char **av)
 	//myquicksort(mas, 0, maslen - 1);
 	quickSort(mas, 0, maslen - 1);
 	ft_putarr(mas, maslen, ' ');
-	free(mas);
+	free(mas);*/
 
 	delete_stack(&stacka);
 	delete_stack(&stackb);
