@@ -383,12 +383,21 @@ t_stack *mypartition(t_stack **a, t_stack **b, t_stack **newhead)
 	t_stack *end;
 
 	end = get_tail(*a);
-	while (*a != end)
+	while (*a)
 	{
+
 		if ((*a)->cont < end->cont)
+		{
+			if ((*a)->next && (*a)->cont > (*a)->next->cont)
+				sa(a);
 			ra(a);
+		}
 		else
+		{
+			if ((*a)->next && (*a)->cont > (*a)->next->cont && (*a)->next != end)
+				sa(a);
 			pb(a, b);
+		}
 	}
 	/*while (*a != pivot)
 	{
@@ -402,23 +411,28 @@ t_stack *mypartition(t_stack **a, t_stack **b, t_stack **newhead)
 	return (end);
 }
 
-t_stack	*myqsort_rec(t_stack **a, t_stack **b)
+t_stack	*myqsort_rec(t_stack **a, t_stack **b, t_stack *pivot)
 {
-	t_stack *pivot;
 	t_stack	*newhead;
-	pivot = mypartition(a, b, &newhead);
-	print_stack(*a, *b);
-	myqsort_rec(b, a);
+
+	pivot = NULL;
+	if (!is_sorted(*a))
+	{
+		pivot = mypartition(a, b, &newhead);
+		print_stack(*a, *b);
+		myqsort_rec(a, b, pivot);
+		myqsort_rec(b, a, pivot);
+	}
 
 }
 
 void	myqsort_stack(t_stack **a, t_stack **b)
 {
-	myqsort_rec(a, b);
+	myqsort_rec(a, b, NULL);
 
 }
 
-int 	main(int ac, char **av)
+int main(int ac, char **av)
 {
 	t_stack *stacka;
 	t_stack *stackb;
