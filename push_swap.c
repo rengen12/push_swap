@@ -411,25 +411,33 @@ t_stack *mypartition(t_stack **a, t_stack **b, t_stack **newhead)
 	return (end);
 }
 
-t_stack	*myqsort_rec(t_stack **a, t_stack **b, t_stack *pivot)
+void 	sort_2par(t_stack **st)
 {
-	t_stack	*newhead;
-
-	pivot = NULL;
-	if (!is_sorted(*a))
-	{
-		pivot = mypartition(a, b, &newhead);
-		print_stack(*a, *b);
-		myqsort_rec(a, b, pivot);
-		myqsort_rec(b, a, pivot);
-	}
-
+	if (*st && (*st)->next)
+		if ((*st)->cont > (*st)->next->cont)
+			sa(st);
 }
 
-void	myqsort_stack(t_stack **a, t_stack **b)
+void	myqsort_stack(t_stack **a, t_stack **b, int q, char **cmds)
 {
-	myqsort_rec(a, b, NULL);
+	int		moved;
 
+	if (is_sorted(*a))
+		return ;
+	if (q > 2)
+	{
+		moved = push_half_to_b(a, b, cmds,q);
+		//print_stack(*a, *b);
+		myqsort_stack(a, b, q - moved, cmds);
+	}
+	else
+		sort_2par(a);
+	if (is_sorted(*a))
+		while (*b)
+		{
+			pa(a, b);
+			*cmds = ft_strjoin(*cmds, "pa\n");
+		}
 }
 
 int main(int ac, char **av)
@@ -463,7 +471,7 @@ int main(int ac, char **av)
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
-		myqsort_stack(&stacka, &stackb);
+		myqsort_stack(&stacka, &stackb, lstlen(stacka), &cmds);
 		//ft_qsort(&stacka, &stackb, &cmds);
 		//cmds = mysort(&stacka, &stackb, cmds);
 		//median_sort(&stacka, &stackb, cmds);
@@ -472,7 +480,7 @@ int main(int ac, char **av)
 		/*while (!is_sorted(stacka))
 			cmds = bublesort(&stacka, &stackb, cmds);*/
 
-	//ft_putstr(cmds);
+	ft_putstr(cmds);
 	//cmds = opt_cmds(cmds);
 	ft_putstr("\n\n");
 	print_stack(stacka, stackb);

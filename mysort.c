@@ -347,15 +347,16 @@ t_stack *buble_sort_st(t_stack *st, int q)
 int		find_av_val(t_stack *st, int qel)
 {
 	int 	i;
+	t_stack *tmp;
 
 	i = 0;
-	st = buble_sort_st(st, qel);
+	tmp = buble_sort_st(st, qel);
 	while (i < qel / 2)
 	{
-		st = st->next;
+		tmp = tmp->next;
 		i++;
 	}
-	return (st->cont);
+	return (tmp->cont);
 }
 
 int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
