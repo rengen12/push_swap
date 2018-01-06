@@ -320,22 +320,45 @@ void	swap_st_cont(int *a, int *b)
 	*b = tmp;
 }
 
+void 	swap_st_elem(t_stack **prev, t_stack **cur, t_stack **nxt)
+{
+	t_stack *newnxt;
+
+	if (*prev)
+	{
+		(*prev)->next = *nxt;
+		newnxt = (*nxt)->next;
+		(*nxt)->next = *cur;
+		(*cur)->next = newnxt;
+	}
+	else
+	{
+		newnext = (*nxt)->next;
+		(*nxt)->next = *cur;
+		(*cur)->next = newnext;
+		*cur = *nxt;
+	}
+}
+
 t_stack *buble_sort_st(t_stack *st, int q)
 {
 	int	i;
 	int y;
 	t_stack *head;
+	t_stack *prev;
 
 	i = 0;
 	head = st;
+	prev = NULL;
 	while (i < q - 1)
 	{
 		y = 0;
 		while (y < q - i - 1)
 		{
 			if (st->cont > st->next->cont)
-				swap_st_cont(&st->cont, &st->next->cont);
+				swap_st_elem(&prev, &st, &st->next);
 			y++;
+			prev = st;
 			st = st->next;
 		}
 		i++;
