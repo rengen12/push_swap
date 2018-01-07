@@ -29,6 +29,11 @@ int		choose_direct_rot(t_stack *stack, t_stack *min);
 void	ft_qsort(t_stack **sta, t_stack **stb, char **cmds);
 int 	is_sorted_n(t_stack *st, int n);
 int 	is_sorted_rev(t_stack *st);
+int 	is_sorted_rev_n(t_stack *stack, int n);
 int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel);
+int		push_half_to_a(t_stack **sta, t_stack **stb, char **cmds, int qel);
+
+void	myqsort_stack_a(t_stack **a, t_stack **b, int q, char **cmds);
+void	myqsort_stack_b(t_stack **a, t_stack **b, int q, char **cmds);
 
 #endif

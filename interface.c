@@ -80,6 +80,19 @@ int 	is_sorted_rev(t_stack *stack)
 	return (1);
 }
 
+int 	is_sorted_rev_n(t_stack *stack, int n)
+{
+	if (stack)
+	{
+		while (stack->next && n--)
+			if (stack->cont < stack->next->cont)
+				return (0);
+			else
+				stack = stack->next;
+	}
+	return (1);
+}
+
 int 	is_sorted_n(t_stack *st, int n)
 {
 	if (st)
