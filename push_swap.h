@@ -36,4 +36,7 @@ int		push_half_to_a(t_stack **sta, t_stack **stb, char **cmds, int qel);
 void	myqsort_stack_a(t_stack **a, t_stack **b, int q, char **cmds);
 void	myqsort_stack_b(t_stack **a, t_stack **b, int q, char **cmds);
 
+int 	find_min_val_n(t_stack *st, int q);
+int 	find_max_val_n(t_stack *st, int q);
+
 #endif

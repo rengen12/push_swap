@@ -278,6 +278,38 @@ int 	find_max_val(t_stack *st)
 	return (max);
 }
 
+int 	find_min_val_n(t_stack *st, int q)
+{
+	int 	min;
+
+	if (!st)
+		return (0);
+	min = st->cont;
+	while (st && q--)
+	{
+		if (st->cont <  min)
+			min = st->cont;
+		st = st->next;
+	}
+	return (min);
+}
+
+int 	find_max_val_n(t_stack *st, int q)
+{
+	int 	max;
+
+	if (!st)
+		return (0);
+	max = st->cont;
+	while (st && q--)
+	{
+		if (st->cont >  max)
+			max = st->cont;
+		st = st->next;
+	}
+	return (max);
+}
+
 void	swap_st_cont(int *a, int *b)
 {
 	int 	tmp;
@@ -381,33 +413,46 @@ int		push_half_to_a(t_stack **sta, t_stack **stb, char **cmds, int qel)
 {
 	int 	av_val;
 	int 	to_move;
+	int 	rx;
+	int 	needrotate;
 
 	to_move = 0;
+	rx = 0;
 	if (!*stb)
 		return (0);
+	needrotate = (lstlen(*stb) != qel) ? 1 : 0;
 	av_val = find_av_val(*stb, qel);
 	while (qel--)
-		if ((*stb)->cont >= av_val)
+		if ((*stb)->cont > av_val)
 		{
-			if ((*stb)->next && (*stb)->cont < (*stb)->next->cont)
+			/*good*/
+			/*if ((*stb)->next && (*stb)->cont < (*stb)->next->cont)
 			{
 				sb(stb);
 				*cmds = ft_strjoin(*cmds, "sb\n");
-			}
+			}*/
 			pa(sta, stb);
 			to_move++;
 			*cmds = ft_strjoin(*cmds, "pa\n");
-			if (*sta && (*sta)->next && (*sta)->cont > (*sta)->next->cont)
+			/*good*/
+			/*if (*sta && (*sta)->next && (*sta)->cont > (*sta)->next->cont)
 			{
 				sa(sta);
 				*cmds = ft_strjoin(*cmds, "sa\n");
-			}
+			}*/
 		}
 		else
 		{
+			rx++;
 			rb(stb);
 			if (*stb)
 				*cmds = ft_strjoin(*cmds, "rb\n");
+		}
+	if (needrotate)
+		while (rx--)
+		{
+			rrb(stb);
+			*cmds = ft_strjoin(*cmds, "rrb\n");
 		}
 	return (to_move);
 }
@@ -416,23 +461,29 @@ int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
 {
 	int 	av_val;
 	int 	to_move;
+	int 	rx;
+	int 	needrotate;
 
+	rx = 0;
 	to_move = 0;
+	needrotate = (lstlen(*sta) != qel) ? 1 : 0;
 	if (!*sta)
 		return (0);
 	av_val = find_av_val(*sta, qel);
 	while (qel--)
 		if ((*sta)->cont < av_val)
 		{
-			if ((*sta)->next && (*sta)->cont > (*sta)->next->cont)
+			/*good*/
+			/*if ((*sta)->next && (*sta)->cont > (*sta)->next->cont)
 			{
 				sa(sta);
 				*cmds = ft_strjoin(*cmds, "sa\n");
-			}
+			}*/
 			pb(sta, stb);
 			to_move++;
 			*cmds = ft_strjoin(*cmds, "pb\n");
-			/*if (*stb && (*stb)->next && (*stb)->cont < (*stb)->next->cont)
+			/*bad idea
+			 * if (*stb && (*stb)->next && (*stb)->cont < (*stb)->next->cont)
 			{
 				sb(stb);
 				*cmds = ft_strjoin(*cmds, "sb\n");
@@ -441,8 +492,15 @@ int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
 		else
 		{
 			ra(sta);
+			rx++;
 			if (*sta)
 				*cmds = ft_strjoin(*cmds, "ra\n");
+		}
+	if (needrotate)
+		while (rx--)
+		{
+			rra(sta);
+			*cmds = ft_strjoin(*cmds, "rra\n");
 		}
 	return (to_move);
 }
