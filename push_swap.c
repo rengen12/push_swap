@@ -542,12 +542,12 @@ void	myqsort_stack_b(t_stack **a, t_stack **b, int q, char **cmds)
 	int 	i;
 
 	i = 0;
-	ft_putendl("________________");
+	/*ft_putendl("________________");
 	ft_putendl("qs B start");
 	ft_putstr("q = ");
 	ft_putnbr(q);
 	ft_putendl("");
-	print_stack(*a, *b);
+	print_stack(*a, *b);*/
 	if (is_sorted_rev_n(*b, q))
 	{
 		while (i < q && *b)
@@ -563,12 +563,12 @@ void	myqsort_stack_b(t_stack **a, t_stack **b, int q, char **cmds)
 		{
 
 			moved = push_half_to_a(a, b, cmds, q);
-			ft_putendl("________________");
+			/*ft_putendl("________________");
 			ft_putendl("qs B after pushing");
 			ft_putstr("q = ");
 			ft_putnbr(q);
 			ft_putendl("");
-			print_stack(*a, *b);
+			print_stack(*a, *b);*/
 
 			myqsort_stack_a(a, b, moved, cmds);
 			myqsort_stack_b(a, b, q - moved, cmds);
@@ -577,47 +577,47 @@ void	myqsort_stack_b(t_stack **a, t_stack **b, int q, char **cmds)
 		else
 			sort_3par_b(a, b, cmds, q);
 
-	ft_putendl("________________");
+	/*ft_putendl("________________");
 	ft_putendl("qs B end");
 	ft_putstr("q = ");
 	ft_putnbr(q);
 	ft_putendl("");
-	print_stack(*a, *b);
+	print_stack(*a, *b);*/
 }
 
 void	myqsort_stack_a(t_stack **a, t_stack **b, int q, char **cmds)
 {
 	int		moved;
 
-	ft_putendl("________________");
+	/*ft_putendl("________________");
 	ft_putendl("qs A start");
 	ft_putstr("q = ");
 	ft_putnbr(q);
 	ft_putendl("");
-	print_stack(*a, *b);
+	print_stack(*a, *b);*/
 	if (is_sorted_n(*a, q))
 		return ;
 	if (q > 3)
 	{
 		moved = push_half_to_b(a, b, cmds, q);
-		ft_putendl("________________");
+		/*ft_putendl("________________");
 		ft_putendl("qs A after pushing");
 		ft_putstr("q = ");
 		ft_putnbr(q);
 		ft_putendl("");
-		print_stack(*a, *b);
+		print_stack(*a, *b);*/
 
 		myqsort_stack_a(a, b, q - moved, cmds);
 		myqsort_stack_b(a, b, moved, cmds);
 	}
 	else
 		sort_3par_a(a, cmds, q);
-	ft_putendl("________________");
+	/*ft_putendl("________________");
 	ft_putendl("qs A end");
 	ft_putstr("q = ");
 	ft_putnbr(q);
 	ft_putendl("");
-	print_stack(*a, *b);
+	print_stack(*a, *b);*/
 
 
 }
@@ -670,10 +670,10 @@ int main(int ac, char **av)
 
 	ft_putstr(cmds);
 	//cmds = opt_cmds(cmds);
-	ft_putendl("\n\nFINAL");
-	print_stack(stacka, stackb);
+	/*ft_putendl("\n\nFINAL");
+	print_stack(stacka, stackb);*/
 	if (is_sorted(stacka))
-		ft_putstr("Stack is sorted");
+		ft_putendl("Stack is sorted");
 
 
 
