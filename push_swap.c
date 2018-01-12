@@ -225,6 +225,109 @@ void	myqsort_stack_a(t_stack **a, t_stack **b, int q, char **cmds)
 
 }
 
+float 	sort_factor(t_stack *st, int direct, int qel)
+{
+	float	res;
+
+	res = 1;
+	/*if (direct == 1)
+		res = 1;
+	else
+		res = -1;*/
+	while (st && st->next)
+	{
+		if (direct == 1)
+		{
+			if (st->cont < st->next->cont)
+				res++;
+		}
+		else
+			if (st->cont > st->next->cont)
+				res++;//--
+		st = st->next;
+	}
+	return (res / qel * 100);
+}
+
+t_stack *getlast(t_stack *cur)
+{
+	while (cur != NULL && cur->next != NULL)
+		cur = cur->next;
+	return (cur);
+}
+
+void	buble_sort(t_stack **a, t_stack **b, char **cmds)
+{
+	int 	f;
+	t_stack *tmp;
+
+	f = 1;
+	while (f)
+	{
+		f = 0;
+		tmp = getlast(*a);
+		while ((*a)->cont != tmp->cont)
+		{
+			if ((*a)->cont > (*a)->next->cont)
+			{
+				f = 1;
+				sa(a);
+				*cmds = ft_strjoin_fr_frst(*cmds, "sa\n");
+			}
+			else
+			{
+				ra(a);
+				*cmds = ft_strjoin_fr_frst(*cmds, "ra\n");
+			}
+		}
+		if (f)
+		{
+			ra(a);
+			*cmds = ft_strjoin_fr_frst(*cmds, "ra\n");
+		}
+		print_stack(*a, *b);
+	}
+	/*ra(a);
+	*cmds = ft_strjoin(*cmds, "ra\n");*/
+}
+
+char	*opt_cmds(char *cmds)
+{
+	char 	*res;
+	int 	i;
+	int 	icmds;
+
+	i = 0;
+	icmds = 0;
+	if (!(res = ft_strnew(ft_strlen(cmds))))
+		return (NULL);
+	while (cmds[icmds])
+	{
+		if (ft_strcmp(&cmds[icmds], "ra\nrb\n") == 0 || ft_strcmp(&cmds[icmds], "rb\nra\n") == 0)
+		{
+			res = ft_strcat(res, "rr\n");
+			icmds += 6;
+			i += 3;
+		}
+		else if (ft_strcmp(&cmds[icmds], "rra\nrrb\n") == 0 || ft_strcmp(&cmds[icmds], "rrb\nrra\n") == 0)
+		{
+			res = ft_strcat(res, "rrr\n");
+			icmds += 8;
+			i += 4;
+		}
+		else if (ft_strcmp(&cmds[icmds], "sa\nsb\n") == 0 || ft_strcmp(&cmds[icmds], "sb\nsa\n") == 0)
+		{
+			res = ft_strcat(res, "ss\n");
+			icmds += 6;
+			i += 3;
+		}
+		else
+			res[i++] = cmds[icmds++];
+	}
+	free(cmds);
+	return (res);
+}
+
 int main(int ac, char **av)
 {
 	t_stack *stacka;
@@ -235,7 +338,7 @@ int main(int ac, char **av)
 
 	stacka = NULL;
 	stackb = NULL;
-	cmds = "";
+	cmds = ft_strnew(1);
 	//printf("ac = %d\n", ac);
 
 
@@ -252,15 +355,19 @@ int main(int ac, char **av)
 		datatostack(ac - 1, 0, av, &stacka);
 	//print_stack(stacka, stackb);
 
-
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka);
 	else
 	{
+		float sf;
+		sf = sort_factor(stacka, 1, lstlen(stacka));
+		printf("asc %f\n", sf);
+		sf = sort_factor(stacka, 0, lstlen(stacka));
+		printf("desc %f\n", sf);
 
-			myqsort_stack_a(&stacka, &stackb, lstlen(stacka), &cmds);
-			//myqsort_stack_b(&stacka, &stackb, lstlen(stackb), &cmds);
-		//cmds = mysort(&stacka, &stackb, cmds);
+		//myqsort_stack_a(&stacka, &stackb, &cmds);
+		cmds = mysort(&stacka, &stackb, cmds);
+		//buble_sort(&stacka, &stackb, lstlen(stacka), &cmds);
 
 	}
 		//ft_qsort(&stacka, &stackb, &cmds);
@@ -272,12 +379,12 @@ int main(int ac, char **av)
 			cmds = bublesort(&stacka, &stackb, cmds);*/
 
 	ft_putstr(cmds);
-	//cmds = opt_cmds(cmds);
+	cmds = opt_cmds(cmds);
 	/*ft_putendl("\n\nFINAL");
-	print_stack(stacka, stackb);*/
-	/*if (is_sorted(stacka))
+	print_stack(stacka, stackb);
+	if (is_sorted(stacka))
 		ft_putendl("Stack is sorted");*/
-
+	free(cmds);
 	delete_stack(&stacka);
 	delete_stack(&stackb);
 	return (0);

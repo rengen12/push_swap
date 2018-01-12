@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
 void	rewrite_mas(t_stack **mas, t_stack *last)
 {
 	mas[0] = mas[1];
@@ -112,18 +114,18 @@ char	*rotate_b(t_stack **st, int rx, int rrx, char *cmds)
 		while (rrx-- > 0)
 		{
 			rra(st);
-			cmds = ft_strjoin(cmds, "rra\n");
+			cmds = ft_strjoin_fr_frst(cmds, "rra\n");
 		}
 	else
 		while (rx-- > 0)
 		{
 			ra(st);
-			cmds = ft_strjoin(cmds, "ra\n");
+			cmds = ft_strjoin_fr_frst(cmds, "ra\n");
 		}
 	return (cmds);
 }
 
-char	*paste_in_tail(t_stack **st, int to_find, char *cmds)
+char	*paste_in_tail(t_stack **stb, int to_find, char *cmds)
 {
 	t_stack *tmp;
 	int 	rx;
@@ -131,7 +133,7 @@ char	*paste_in_tail(t_stack **st, int to_find, char *cmds)
 
 	rx = 1;
 	rrx = 0;
-	tmp = *st;
+	tmp = *stb;
 	while (tmp && tmp->cont != to_find)
 	{
 		rx++;
@@ -144,10 +146,10 @@ char	*paste_in_tail(t_stack **st, int to_find, char *cmds)
 		rrx++;
 		tmp = tmp->next;
 	}
-	return (rotate_b(st, rx, rrx, cmds));
+	return (rotate_b(stb, rx, rrx, cmds));
 }
 
-char	*paste_in_head(t_stack **st, int to_find, char *cmds)
+char	*paste_in_head(t_stack **stb, int to_find, char *cmds)
 {
 	t_stack *tmp;
 	int 	rx;
@@ -155,7 +157,7 @@ char	*paste_in_head(t_stack **st, int to_find, char *cmds)
 
 	rx = 0;
 	rrx = 0;
-	tmp = *st;
+	tmp = *stb;
 	while (tmp && tmp->cont != to_find)
 	{
 		rx++;
@@ -166,7 +168,7 @@ char	*paste_in_head(t_stack **st, int to_find, char *cmds)
 		rrx++;
 		tmp = tmp->next;
 	}
-	return (rotate_b(st, rx, rrx, cmds));
+	return (rotate_b(stb, rx, rrx, cmds));
 	//pb(sta, stb);
 	//rb(stb); //disable
 }
@@ -194,7 +196,7 @@ char	*paste_in_head(t_stack **st, int to_find, char *cmds)
 		return (0);
 }*/
 
-char	*paste_in_body(t_stack **sta, t_stack **stb, int max, char *cmds)
+char	*paste_in_body(t_stack **sta, t_stack **stb, int min, char *cmds)
 {
 	t_stack *tmp;
 	int 	rx;
@@ -202,15 +204,15 @@ char	*paste_in_body(t_stack **sta, t_stack **stb, int max, char *cmds)
 
 	rx = 0;
 	rrx = 0;
-	tmp = *sta;
+	tmp = *stb;
 	while (tmp)
 	{
-		if (max >= tmp->cont && tmp->cont > (*stb)->cont)
-			max = tmp->cont;
+		if (min <= tmp->cont && tmp->cont < (*sta)->cont)
+			min = tmp->cont;
 		tmp = tmp->next;
 	}
-	tmp = *sta;
-	while (tmp && tmp->cont != max)
+	tmp = *stb;
+	while (tmp && tmp->cont != min)
 	{
 		rx++;
 		tmp = tmp->next;
@@ -220,17 +222,17 @@ char	*paste_in_body(t_stack **sta, t_stack **stb, int max, char *cmds)
 		rrx++;
 		tmp = tmp->next;
 	}
-	return (rotate_b(sta, rx, rrx, cmds));
+	return (rotate_b(stb, rx, rrx, cmds));
 	//rb(stb);//disable
 	//rb(stb);//disable
 }
 
-t_stack *getlast(t_stack *cur)
+/*t_stack *getlast(t_stack *cur)
 {
 	while (cur != NULL && cur->next != NULL)
 		cur = cur->next;
 	return (cur);
-}
+}*/
 
 
 
@@ -293,40 +295,42 @@ void	ft_qsort(t_stack **a, t_stack **b)
 
 char	*insert_stb(t_stack **sta, t_stack **stb, int *extval, char *cmds)
 {
-	if (!*sta)
+	if (!*stb)
 	{
-		pa(sta, stb);
-		cmds = ft_strjoin(cmds, "pa\n");
-		extval[0] = (*sta)->cont;
-		extval[1] = (*sta)->cont;
+		pb(sta, stb);
+		cmds = ft_strjoin_fr_frst(cmds, "pb\n");
+		extval[0] = (*stb)->cont;
+		extval[1] = (*stb)->cont;
 	}
-	else if ((*stb)->cont > extval[1]) //bigger biggest
+	else if ((*sta)->cont < extval[0]) //lover minimal
 	{
-		cmds = paste_in_tail(sta, extval[1], cmds);
-		pa(sta, stb);
-		cmds = ft_strjoin(cmds, "pa\n");
-		extval[1] = (*sta)->cont;
+		cmds = paste_in_tail(stb, extval[0], cmds);
+		pb(sta, stb);
+		cmds = ft_strjoin_fr_frst(cmds, "pb\n");
+		extval[0] = (*stb)->cont;
 	}
-	else if ((*stb)->cont < extval[0]) //lover minimal
+	else if ((*sta)->cont > extval[1]) //bigger biggest
 	{
-		cmds = paste_in_head(sta, extval[0], cmds);
-		pa(sta, stb);
-		cmds = ft_strjoin(cmds, "pa\n");
-		extval[0] = (*sta)->cont;
+		cmds = paste_in_head(stb, extval[1], cmds);
+		pb(sta, stb);
+		cmds = ft_strjoin_fr_frst(cmds, "pb\n");
+		extval[1] = (*stb)->cont;
 	}
 	else
 	{
-		cmds = paste_in_body(sta, stb, extval[1], cmds);
-		pa(sta, stb);
-		cmds = ft_strjoin(cmds, "pa\n");
+		cmds = paste_in_body(sta, stb, extval[0], cmds);
+		pb(sta, stb);
+		cmds = ft_strjoin_fr_frst(cmds, "pb\n");
 		//choose_direct_rot_f_insert(*stb, (*sta)->cont);
 	}
 	return (cmds);
 }
 
+
+
 char 	*mysort(t_stack **sta, t_stack **stb, char *cmds)
 {
-	//t_stack *min;
+	t_stack *min;
 	int 	qel;
 	int 	extval[2];
 	//int 	lsthalf;
@@ -341,13 +345,73 @@ char 	*mysort(t_stack **sta, t_stack **stb, char *cmds)
 		cmds = ft_strjoin(cmds, "pb\n");
 		lsthalf--;
 	}*/
-	extval[0] = find_min_val(*sta);
-	extval[1] = find_max_val(*sta);
+	/*extval[0] = find_min_val(*sta);
+	extval[1] = find_max_val(*sta);*/
 
 
 
 
-	/*while (*sta)
+	while (*sta)
+	{
+		//i = 0;
+		//qel = create_cmp_arr(*sta, &min);
+		min = find_min_in_stack(*sta);
+		qel = -1;
+		while (*sta != min)
+		{
+			if (qel < 0)
+			{
+				rra(sta);
+				cmds = ft_strjoin_fr_frst(cmds, "rra\n");
+			}
+			else
+			{
+				ra(sta);
+				cmds = ft_strjoin_fr_frst(cmds, "ra\n");
+			}
+		}
+		/*if (!qel)
+			qel = 1;*/
+		//qel = lstlen(*stb);
+		while (qel)
+		{
+			//print_stack(*sta, *stb);
+			cmds = insert_stb(sta, stb, extval, cmds);
+			if (qel < 0)
+				qel++;
+			else
+				qel--;
+		}
+		//print_stack(*sta, *stb);
+	}
+	cmds = paste_in_head(stb, extval[1], cmds);
+	while (*stb)
+	{
+		pa(sta, stb);
+		cmds = ft_strjoin_fr_frst(cmds, "pa\n");
+	}
+	return (cmds);
+}
+
+
+/*char 	*mysort(t_stack **sta, t_stack **stb, char *cmds)
+{
+	t_stack *min;
+	int 	qel;
+	int 	extval[2];
+	//int 	lsthalf;
+	//int 	i;
+	//int 	moved;
+
+	//lsthalf = lstlen(*sta) / 2;
+
+	//extval[0] = find_min_val(*sta);
+	//extval[1] = find_max_val(*sta);
+
+
+
+
+	while (*sta)
 	{
 		//i = 0;
 		qel = create_cmp_arr(*sta, &min);
@@ -365,27 +429,27 @@ char 	*mysort(t_stack **sta, t_stack **stb, char *cmds)
 			}
 		}
 		if (!qel)
-			qel = 1;*/
-	qel = lstlen(*stb);
-	while (qel)
-	{
-		//print_stack(*sta, *stb);
-		cmds = insert_stb(sta, stb, extval, cmds);
-		if (qel < 0)
-			qel++;
-		else
-			qel--;
-	}
+			qel = 1;
+	//qel = lstlen(*stb);
+		while (qel)
+		{
+			//print_stack(*sta, *stb);
+			cmds = insert_stb(sta, stb, extval, cmds);
+			if (qel < 0)
+				qel++;
+			else
+				qel--;
+		}
 	//print_stack(*sta, *stb);
-	//}
-	cmds = paste_in_head(sta, extval[0], cmds);
-	/*while (*stb)
+	}
+	cmds = paste_in_head(stb, extval[1], cmds);
+	while (*stb)
 	{
 		pa(sta, stb);
 		cmds = ft_strjoin(cmds, "pa\n");
-	}*/
+	}
 	return (cmds);
-}
+}*/
 
 
 

@@ -20,6 +20,7 @@
 void	datatostack(int ac, int file, char **av, t_stack **stack);
 void	ft_delete_exit(char *message, t_stack **stack);
 int 	is_sorted(t_stack *stack);
+char	*ft_strjoin_fr_frst(char *s1, char const *s2);
 
 int		lstlen(t_stack *stack);
 
@@ -37,5 +38,6 @@ void	myqsort_stack_b(t_stack **a, t_stack **b, int q, char **cmds);
 
 int 	find_min_val_n(t_stack *st, int q);
 int 	find_max_val_n(t_stack *st, int q);
+t_stack	*find_min_in_stack(t_stack *stack);
 
 #endif

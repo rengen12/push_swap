@@ -50,7 +50,10 @@ void	datatostack(int ac, int file, char **av, t_stack **stack)
 			ft_delete_exit("Error!\nDuplicate found", stack);
 		add_node(stack, (int)num);
 		if (file)
+		{
+			free(*av);
 			break ;
+		}
 	}
 }
 
