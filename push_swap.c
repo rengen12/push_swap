@@ -275,8 +275,8 @@ int main(int ac, char **av)
 	//cmds = opt_cmds(cmds);
 	/*ft_putendl("\n\nFINAL");
 	print_stack(stacka, stackb);*/
-	if (is_sorted(stacka))
-		ft_putendl("Stack is sorted");
+	/*if (is_sorted(stacka))
+		ft_putendl("Stack is sorted");*/
 
 	delete_stack(&stacka);
 	delete_stack(&stackb);

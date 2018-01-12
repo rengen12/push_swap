@@ -123,21 +123,50 @@ int		find_av_val(t_stack *st, int qel)
 	return (res);
 }
 
+int		find_quant_to_move(t_stack *st, int av_val, char s_cmp)
+{
+	int 	res;
+
+	res = 0;
+	if (s_cmp == '<')
+	{
+		while (st)
+		{
+			if (st->cont < av_val)
+				res++;
+			st = st->next;
+		}
+	}
+	else if (s_cmp == '>')
+	{
+		while (st)
+		{
+			if (st->cont >/*=*/ av_val)
+				res++;
+			st = st->next;
+		}
+	}
+	return (res);
+}
+
 int		push_half_to_a(t_stack **sta, t_stack **stb, char **cmds, int qel)
 {
 	int 	av_val;
 	int 	to_move;
 	int 	rx;
 	int 	needrotate;
+	int		i;
 
 	to_move = 0;
+	i = 0;
 	rx = 0;
 	if (!*stb)
 		return (0);
 	needrotate = (lstlen(*stb) != qel) ? 1 : 0;
 	av_val = find_av_val(*stb, qel);
-	while (qel--)
-		if ((*stb)->cont > av_val)
+	to_move = find_quant_to_move(*stb, av_val, '>');
+	while (i < to_move/*qel--*/)
+		if ((*stb)->cont >/*=*/ av_val)
 		{
 			/*good*/
 			/*if ((*stb)->next && (*stb)->cont < (*stb)->next->cont)
@@ -146,7 +175,8 @@ int		push_half_to_a(t_stack **sta, t_stack **stb, char **cmds, int qel)
 				*cmds = ft_strjoin(*cmds, "sb\n");
 			}*/
 			pa(sta, stb);
-			to_move++;
+			//to_move++;
+			i++;
 			*cmds = ft_strjoin(*cmds, "pa\n");
 			/*good*/
 			/*if (*sta && (*sta)->next && (*sta)->cont > (*sta)->next->cont)
@@ -177,14 +207,17 @@ int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
 	int 	to_move;
 	int 	rx;
 	int 	needrotate;
+	int 	i;
 
 	rx = 0;
+	i = 0;
 	to_move = 0;
 	needrotate = (lstlen(*sta) != qel) ? 1 : 0;
 	if (!*sta)
 		return (0);
 	av_val = find_av_val(*sta, qel);
-	while (qel--)
+	to_move = find_quant_to_move(*sta, av_val, '<');
+	while (i < to_move/*qel--*/)
 		if ((*sta)->cont < av_val)
 		{
 			/*good*/
@@ -193,11 +226,12 @@ int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
 				sa(sta);
 				*cmds = ft_strjoin(*cmds, "sa\n");
 			}*/
+			//to_move++;
 			pb(sta, stb);
-			to_move++;
+			i++;
 			*cmds = ft_strjoin(*cmds, "pb\n");
-			/*bad idea
-			 * if (*stb && (*stb)->next && (*stb)->cont < (*stb)->next->cont)
+			/*bad idea*/
+			/*if (*stb && (*stb)->next && (*stb)->cont < (*stb)->next->cont)
 			{
 				sb(stb);
 				*cmds = ft_strjoin(*cmds, "sb\n");
