@@ -11,30 +11,28 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-#include "get_next_line.h"
 
 void	sort_3_nonempty_sta(t_stack **st, char **cmds, int max)
 {
 	if ((*st)->next->cont == max)
 	{
 		ra(st);
-		*cmds = ft_strjoin(*cmds, "ra\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "ra\n");
 		sa(st);
-		*cmds = ft_strjoin(*cmds, "sa\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "sa\n");
 		rra(st);
-		*cmds = ft_strjoin(*cmds, "rra\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "rra\n");
 	}
 	else if ((*st)->cont == max)
 	{
 		sa(st);
-		*cmds = ft_strjoin(*cmds, "sa\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "sa\n");
 		ra(st);
-		*cmds = ft_strjoin(*cmds, "ra\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "ra\n");
 		sa(st);
-		*cmds = ft_strjoin(*cmds, "sa\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "sa\n");
 		rra(st);
-		*cmds = ft_strjoin(*cmds, "rra\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "rra\n");
 	}
 }
 
@@ -48,12 +46,12 @@ void 	sort_3par_a(t_stack **st, char **cmds, int q)
 		if ((*st)->cont == max)
 		{
 			ra(st);
-			*cmds = ft_strjoin(*cmds, "ra\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "ra\n");
 		}
 		else if ((*st)->next->cont == max)
 		{
 			rra(st);
-			*cmds = ft_strjoin(*cmds, "rra\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "rra\n");
 		}
 	}
 	else if (q == 3 && *st && (*st)->next && (*st)->next->next)
@@ -62,20 +60,20 @@ void 	sort_3par_a(t_stack **st, char **cmds, int q)
 		if ((*st)->cont > (*st)->next->cont)
 		{
 			sa(st);
-			*cmds = ft_strjoin(*cmds, "sa\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "sa\n");
 		}
 }
 
 int 	max_at_the_end(t_stack **sta, t_stack **stb, char **cmds)
 {
 	rb(stb);
-	*cmds = ft_strjoin(*cmds, "rb\n");
+	*cmds = ft_strjoin_fr_frst(*cmds, "rb\n");
 	sb(stb);
-	*cmds = ft_strjoin(*cmds, "sb\n");
+	*cmds = ft_strjoin_fr_frst(*cmds, "sb\n");
 	pa(sta, stb);
-	*cmds = ft_strjoin(*cmds, "pa\n");
+	*cmds = ft_strjoin_fr_frst(*cmds, "pa\n");
 	rrb(stb);
-	*cmds = ft_strjoin(*cmds, "rrb\n");
+	*cmds = ft_strjoin_fr_frst(*cmds, "rrb\n");
 	return (2);
 }
 
@@ -86,15 +84,15 @@ int		sort_3_nonempty_stb(t_stack **sta, t_stack **stb, char **cmds, int max)
 	if ((*stb)->cont == max)
 	{
 		pa(sta, stb);
-		*cmds = ft_strjoin(*cmds, "pa\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "pa\n");
 		return (2);
 	}
 	else if ((*stb)->cont == find_min_val_n(*stb, 3) && (*stb)->next->cont == max)
 	{
 		sb(stb);
-		*cmds = ft_strjoin(*cmds, "sb\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "sb\n");
 		pa(sta, stb);
-		*cmds = ft_strjoin(*cmds, "pa\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "pa\n");
 		return (2);
 	}
 	else if ((*stb)->next->next->cont == max)
@@ -107,7 +105,7 @@ void	pa3x(t_stack **sta, t_stack **stb, int q, char **cmds)
 	while (*stb && q--)
 	{
 		pa(sta, stb);
-		*cmds = ft_strjoin(*cmds, "pa\n");
+		*cmds = ft_strjoin_fr_frst(*cmds, "pa\n");
 	}
 }
 void 	sort_3par_b(t_stack **a, t_stack **b, char **cmds, int q)
@@ -120,12 +118,12 @@ void 	sort_3par_b(t_stack **a, t_stack **b, char **cmds, int q)
 		if ((*b)->cont == min)
 		{
 			rb(b);
-			*cmds = ft_strjoin(*cmds, "rb\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "rb\n");
 		}
 		else if ((*b)->next->cont == min)
 		{
 			rrb(b);
-			*cmds = ft_strjoin(*cmds, "rrb\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "rrb\n");
 		}
 	}
 	else if (q == 3 && *b && (*b)->next && (*b)->next->next)
@@ -134,7 +132,7 @@ void 	sort_3par_b(t_stack **a, t_stack **b, char **cmds, int q)
 		if ((*b)->cont < (*b)->next->cont)
 		{
 			sb(b);
-			*cmds = ft_strjoin(*cmds, "sb\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "sb\n");
 		}
 	pa3x(a, b, q, cmds);
 }
@@ -156,7 +154,7 @@ void	myqsort_stack_b(t_stack **a, t_stack **b, int q, char **cmds)
 		while (i < q && *b)
 		{
 			pa(a, b);
-			*cmds = ft_strjoin(*cmds, "pa\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "pa\n");
 			i++;
 		}
 		return ;
@@ -256,7 +254,7 @@ t_stack *getlast(t_stack *cur)
 	return (cur);
 }
 
-void	buble_sort(t_stack **a, t_stack **b, char **cmds)
+void	buble_sort(t_stack **a, char **cmds)
 {
 	int 	f;
 	t_stack *tmp;
@@ -285,63 +283,85 @@ void	buble_sort(t_stack **a, t_stack **b, char **cmds)
 			ra(a);
 			*cmds = ft_strjoin_fr_frst(*cmds, "ra\n");
 		}
-		print_stack(*a, *b);
 	}
-	/*ra(a);
-	*cmds = ft_strjoin(*cmds, "ra\n");*/
+
 }
 
-char	*opt_cmds(char *cmds)
+int 	in_str(const char *str, const char *to_find)
+{
+	int 	i;
+
+	i = 0;
+	while (to_find[i] && str[i] && to_find[i] == str[i])
+		i++;
+	if (!to_find[i])
+		return (1);
+	return (0);
+}
+
+char	*opt_cmds(char *c)
 {
 	char 	*res;
 	int 	i;
-	int 	icmds;
+	int 	ic;
 
 	i = 0;
-	icmds = 0;
-	if (!(res = ft_strnew(ft_strlen(cmds))))
+	ic = 0;
+	if (!(res = ft_strnew(ft_strlen(c))))
 		return (NULL);
-	while (cmds[icmds])
+	while (c[ic])
 	{
-		if (ft_strcmp(&cmds[icmds], "ra\nrb\n") == 0 || ft_strcmp(&cmds[icmds], "rb\nra\n") == 0)
+		if (in_str(&c[ic], "ra\nrb\n") || in_str(&c[ic], "rb\nra\n"))
 		{
 			res = ft_strcat(res, "rr\n");
-			icmds += 6;
+			ic += 6;
 			i += 3;
 		}
-		else if (ft_strcmp(&cmds[icmds], "rra\nrrb\n") == 0 || ft_strcmp(&cmds[icmds], "rrb\nrra\n") == 0)
+		else if (in_str(&c[ic], "rra\nrrb\n") || in_str(&c[ic], "rrb\nrra\n"))
 		{
 			res = ft_strcat(res, "rrr\n");
-			icmds += 8;
+			ic += 8;
 			i += 4;
 		}
-		else if (ft_strcmp(&cmds[icmds], "sa\nsb\n") == 0 || ft_strcmp(&cmds[icmds], "sb\nsa\n") == 0)
+		else if (in_str(&c[ic], "sa\nsb\n") || in_str(&c[ic], "sb\nsa\n"))
 		{
 			res = ft_strcat(res, "ss\n");
-			icmds += 6;
+			ic += 6;
 			i += 3;
 		}
 		else
-			res[i++] = cmds[icmds++];
+			res[i++] = c[ic++];
 	}
-	free(cmds);
+	free(c);
 	return (res);
 }
 
-int main(int ac, char **av)
+void	count_cmds(char *cmds)
+{
+	int		res;
+
+	res = 0;
+	while (*cmds)
+	{
+		if (*cmds == '\n')
+			res++;
+		cmds++;
+	}
+	ft_putstr("num instr = ");
+	ft_putnbr(res);
+	ft_putendl("");
+}
+
+int		main(int ac, char **av)
 {
 	t_stack *stacka;
 	t_stack *stackb;
 	int 	fd;
 	char 	*cmds;
-	//int 	*mas;
 
 	stacka = NULL;
 	stackb = NULL;
 	cmds = ft_strnew(1);
-	//printf("ac = %d\n", ac);
-
-
 	if (ac == 3 && !ft_strcmp(av[1], "-f"))
 	{
 		fd = open(av[2], O_RDONLY);
@@ -351,39 +371,32 @@ int main(int ac, char **av)
 			pa(&stacka, &stackb);
 		close(fd);
 	}
+	else if (ac == 2)
+	{
+		av = ft_strsplit(av[1], ' ');
+		while (*av)
+			datatostack(0, 1, av++, &stackb);
+		while(stackb)
+			pa(&stacka, &stackb);
+	}
 	else
 		datatostack(ac - 1, 0, av, &stacka);
-	//print_stack(stacka, stackb);
-
 	if (is_sorted(stacka))
-		ft_delete_exit("Stack is sorted", &stacka);
+		ft_delete_exit("Stack is sorted", &stacka, NULL);
 	else
-	{
-		float sf;
-		sf = sort_factor(stacka, 1, lstlen(stacka));
-		printf("asc %f\n", sf);
-		sf = sort_factor(stacka, 0, lstlen(stacka));
-		printf("desc %f\n", sf);
+		if (sort_factor(stacka, 0, lstlen(stacka)) >= 77.2)
+			cmds = mysort(&stacka, &stackb, cmds);
+		else
+			myqsort_stack_a(&stacka, &stackb, lstlen(stacka), &cmds);
 
-		//myqsort_stack_a(&stacka, &stackb, &cmds);
-		cmds = mysort(&stacka, &stackb, cmds);
-		//buble_sort(&stacka, &stackb, lstlen(stacka), &cmds);
 
-	}
-		//ft_qsort(&stacka, &stackb, &cmds);
-		//cmds = mysort(&stacka, &stackb, cmds);
-		//median_sort(&stacka, &stackb, cmds);
-		//quickSort(&stacka);
-		//cmds = selection_sort(&stacka, &stackb, cmds);
-		/*while (!is_sorted(stacka))
-			cmds = bublesort(&stacka, &stackb, cmds);*/
-
-	ft_putstr(cmds);
 	cmds = opt_cmds(cmds);
+	ft_putstr(cmds);
 	/*ft_putendl("\n\nFINAL");
-	print_stack(stacka, stackb);
-	if (is_sorted(stacka))
-		ft_putendl("Stack is sorted");*/
+	print_stack(stacka, stackb);*/
+	/*if (is_sorted(stacka))
+		ft_putendl("Stack is sorted1");
+	count_cmds(cmds);*/
 	free(cmds);
 	delete_stack(&stacka);
 	delete_stack(&stackb);

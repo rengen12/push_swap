@@ -102,7 +102,7 @@ int		get_next_line(const int fd, char **line)
 
 	if (!line || fd < 0 || (i = handle_files(files, fd, &f, line)) == -1)
 		return (-1);
-	while (((ret = read(fd, &line[0][i], BUFF_SIZE)) > 0) || f)
+	while (*line && (((ret = read(fd, &line[0][i], BUFF_SIZE)) > 0) || f))
 	{
 		oldi = i;
 		ft_doit(&f, &i);

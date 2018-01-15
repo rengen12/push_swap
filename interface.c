@@ -18,9 +18,12 @@ void	ft_error(char *message)
 	exit(0);
 }
 
-void	ft_delete_exit(char *message, t_stack **stack)
+void	ft_delete_exit(char *message, t_stack **stack1, t_stack **stack2)
 {
-	delete_stack(stack);
+	if (stack1)
+		delete_stack(stack1);
+	if (stack2)
+		delete_stack(stack2);
 	ft_error(message);
 }
 
@@ -42,12 +45,12 @@ void	datatostack(int ac, int file, char **av, t_stack **stack)
 	{
 		if ((!ft_isdigit(*av[ac]) && *av[ac] != '-') || \
 				(!ft_isdigit(*(av[ac] + 1)) && *av[ac] == '-'))
-			ft_delete_exit("Error!\nWrong argument", stack);
+			ft_delete_exit("Error!\nWrong argument", stack, NULL);
 		num = ft_atoi(av[ac--]);
 		if (num > 2147483647 || num < -2147483648)
-			ft_delete_exit("Error!\nOut of int's range", stack);
+			ft_delete_exit("Error!\nOut of int's range", stack, NULL);
 		if (check_duplicates((int)num, *stack))
-			ft_delete_exit("Error!\nDuplicate found", stack);
+			ft_delete_exit("Error!\nDuplicate found", stack, NULL);
 		add_node(stack, (int)num);
 		if (file)
 		{
