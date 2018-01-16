@@ -311,11 +311,11 @@ char	*opt_cmds(char *c)
 		return (NULL);
 	while (c[ic])
 	{
-		if (in_str(&c[ic], "ra\nrb\n") || in_str(&c[ic], "rb\nra\n"))
+		if (in_str(&c[ic], "\nra\nrb\n") || in_str(&c[ic], "\nrb\nra\n"))
 		{
-			res = ft_strcat(res, "rr\n");
-			ic += 6;
-			i += 3;
+			res = ft_strcat(res, "\nrr\n");
+			ic += 7;
+			i += 4;
 		}
 		else if (in_str(&c[ic], "rra\nrrb\n") || in_str(&c[ic], "rrb\nrra\n"))
 		{
@@ -323,12 +323,26 @@ char	*opt_cmds(char *c)
 			ic += 8;
 			i += 4;
 		}
+		else if (in_str(&c[ic], "sa\npb\npb\nsa\n"))
+		{
+			res = ft_strcat(res, "pb\npb\nss\n");
+			ic += 12;
+			i += 9;
+		}
+		else if (in_str(&c[ic], "sb\npa\npa\nsb\n"))
+		{
+			res = ft_strcat(res, "pa\npa\nss\n");
+			ic += 12;
+			i += 9;
+		}
 		else if (in_str(&c[ic], "sa\nsb\n") || in_str(&c[ic], "sb\nsa\n"))
 		{
 			res = ft_strcat(res, "ss\n");
 			ic += 6;
 			i += 3;
 		}
+		else if (in_str(&c[ic], "pa\npb\n") || in_str(&c[ic], "pb\npa\n"))
+			ic += 6;
 		else
 			res[i++] = c[ic++];
 	}
@@ -384,13 +398,15 @@ int		main(int ac, char **av)
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka, NULL);
 	else
-		if (sort_factor(stacka, 0, lstlen(stacka)) >= 77.2)
+		if (sort_factor(stacka, 0, lstlen(stacka)) >= 76.9)
 			cmds = mysort(&stacka, &stackb, cmds);
 		else
 			myqsort_stack_a(&stacka, &stackb, lstlen(stacka), &cmds);
 
 
-	cmds = opt_cmds(cmds);
+	//cmds = opt_cmds(cmds);
+	//cmds = opt_cmds(cmds);
+	//cmds = opt_cmds(cmds);
 	ft_putstr(cmds);
 	/*ft_putendl("\n\nFINAL");
 	print_stack(stacka, stackb);*/

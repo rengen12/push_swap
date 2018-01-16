@@ -69,6 +69,7 @@ int 	main(int ac, char **av)
 		ft_putendl("OK");
 	else
 		ft_putendl("KO");
+	print_stack(stacka, stackb);
 	ft_delete_exit(NULL, &stacka, &stackb);
 	return (0);
 }
