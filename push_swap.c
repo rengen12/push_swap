@@ -172,15 +172,16 @@ int		main(int ac, char **av)
 	t_stack *stacka;
 	t_stack *stackb;
 	char 	*cmds;
+	t_ps_fl	*fl;
 
-	if (ac == 1)
-		return (0);
 	stacka = NULL;
 	stackb = NULL;
+	fl = handle_data(ac, av, &stacka, &stackb);
+	if (ac == 1 || fl->st >= ac)
+		ft_delete_exit(NULL, &stacka, &stackb, &fl);
 	cmds = ft_strnew(1);
-	handle_data(ac, av, &stacka, &stackb);
 	if (is_sorted(stacka))
-		ft_delete_exit("Stack is sorted", &stacka, NULL);
+		ft_delete_exit("Stack is sorted", &stacka, &stackb, &fl);
 	else
 		if (sort_factor(stacka, lstlen(stacka)) >= 76.9)
 			cmds = mysort(&stacka, &stackb, cmds);
@@ -191,7 +192,6 @@ int		main(int ac, char **av)
 	cmds = opt_cmds(cmds);
 	ft_putstr(cmds);
 	free(cmds);
-	delete_stack(&stacka);
-	delete_stack(&stackb);
+	ft_delete_exit(NULL, &stacka, &stackb, &fl);
 	return (0);
 }

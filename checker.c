@@ -12,7 +12,13 @@
 
 #include "push_swap.h"
 
-static void func_cmnds(t_stack **a, t_stack **b, char *cmd)
+static void	use_flags(t_stack **a, t_stack **b, t_ps_fl *fl)
+{
+	if (fl->v)
+		print_stack(*a, *b);
+}
+
+static void	func_cmnds(t_stack **a, t_stack **b, char *cmd, t_ps_fl *fl)
 {
 	if (!ft_strcmp(cmd, "sa"))
 		sa(a);
@@ -37,26 +43,28 @@ static void func_cmnds(t_stack **a, t_stack **b, char *cmd)
 	else if (!ft_strcmp(cmd, "rrr"))
 		rrr(a, b);
 	else
-		ft_delete_exit("Wrong command in command list", a, b);
+		ft_delete_exit("Wrong command in command list", a, b, &fl);
+	use_flags(a, b, fl);
 }
 
-int 	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	char	*line;
 	t_stack *stacka;
 	t_stack *stackb;
+	t_ps_fl	*fl;
 
 	stacka = NULL;
 	stackb = NULL;
-	if (ac == 1)
-		return (0);
-	handle_data(ac, av, &stacka, &stackb);
+	fl = handle_data(ac, av, &stacka, &stackb);
+	if (ac == 1 || fl->st >= ac)
+		ft_delete_exit(NULL, &stacka, &stackb, &fl);
 	while (get_next_line(0, &line) > 0)
-		func_cmnds(&stacka, &stackb, line);
+		func_cmnds(&stacka, &stackb, line, fl);
 	if (is_sorted(stacka) && !stackb)
 		ft_putendl("OK");
 	else
 		ft_putendl("KO");
-	ft_delete_exit(NULL, &stacka, &stackb);
+	ft_delete_exit(NULL, &stacka, &stackb, &fl);
 	return (0);
 }
