@@ -404,9 +404,9 @@ int		main(int ac, char **av)
 			myqsort_stack_a(&stacka, &stackb, lstlen(stacka), &cmds);
 
 
-	//cmds = opt_cmds(cmds);
-	//cmds = opt_cmds(cmds);
-	//cmds = opt_cmds(cmds);
+	cmds = opt_cmds(cmds);
+	cmds = opt_cmds(cmds);
+	cmds = opt_cmds(cmds);
 	ft_putstr(cmds);
 	/*ft_putendl("\n\nFINAL");
 	print_stack(stacka, stackb);*/

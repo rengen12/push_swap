@@ -140,7 +140,7 @@ int		find_quant_to_move(t_stack *st, int av_val, char s_cmp)
 	{
 		while (st)
 		{
-			if (st->cont < av_val)
+			if (st->cont <= av_val)
 				res++;
 			st = st->next;
 		}
@@ -149,7 +149,7 @@ int		find_quant_to_move(t_stack *st, int av_val, char s_cmp)
 	{
 		while (st)
 		{
-			if (st->cont >/*=*/ av_val)
+			if (st->cont > av_val)
 				res++;
 			st = st->next;
 		}
@@ -177,20 +177,20 @@ int		push_half_to_a(t_stack **sta, t_stack **stb, char **cmds, int qel)
 		{
 			pa(sta, stb);
 			i++;
-			*cmds = ft_strjoin(*cmds, "pa\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "pa\n");
 		}
 		else
 		{
 			rx++;
 			rb(stb);
 			if (*stb)
-				*cmds = ft_strjoin(*cmds, "rb\n");
+				*cmds = ft_strjoin_fr_frst(*cmds, "rb\n");
 		}
 	if (needrotate)
 		while (rx--)
 		{
 			rrb(stb);
-			*cmds = ft_strjoin(*cmds, "rrb\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "rrb\n");
 		}
 	return (to_move);
 }
@@ -211,24 +211,24 @@ int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
 	av_val = find_av_val(*sta, qel, 1);
 	to_move = find_quant_to_move(*sta, av_val, '<');
 	while (i < to_move/*qel--*/)
-		if ((*sta)->cont < av_val)
+		if ((*sta)->cont <= av_val)
 		{
 			pb(sta, stb);
 			i++;
-			*cmds = ft_strjoin(*cmds, "pb\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "pb\n");
 		}
 		else
 		{
 			ra(sta);
 			rx++;
 			if (*sta)
-				*cmds = ft_strjoin(*cmds, "ra\n");
+				*cmds = ft_strjoin_fr_frst(*cmds, "ra\n");
 		}
 	if (needrotate)
 		while (rx--)
 		{
 			rra(sta);
-			*cmds = ft_strjoin(*cmds, "rra\n");
+			*cmds = ft_strjoin_fr_frst(*cmds, "rra\n");
 		}
 	return (to_move);
 }
