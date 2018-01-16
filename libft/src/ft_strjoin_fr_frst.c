@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_4_elem.c                                      :+:      :+:    :+:   */
+/*   ft_strjoin_fr_frst.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/08 16:15:00 by amichak           #+#    #+#             */
-/*   Updated: 2018/01/08 16:15:00 by amichak          ###   ########.fr       */
+/*   Created: 2017/10/30 15:37:28 by amichak           #+#    #+#             */
+/*   Updated: 2017/10/30 15:37:30 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_4_a(t_stack *st, int q, char **cmds)
+char	*ft_strjoin_fr_frst(char *s1, char const *s2)
 {
+	char	*r;
 
-	if (is_sorted_n(st, q))
-		return ;
-	//create_func_arr();
+	if (!s1 || !s2)
+		return (NULL);
+	if (!(r = ft_strnew(ft_strlen(s1) + ft_strlen(s2))))
+		return (NULL);
+	ft_strcpy(r, s1);
+	ft_strcat(r, s2);
+	free(s1);
+	return (r);
 }

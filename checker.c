@@ -45,27 +45,15 @@ int 	main(int ac, char **av)
 	char	*line;
 	t_stack *stacka;
 	t_stack *stackb;
-	int 	fd;
 
 	stacka = NULL;
 	stackb = NULL;
 	if (ac == 1)
-		ft_delete_exit("Enter pls correct num line and command list", NULL, NULL);
-	if (ac == 3 && !ft_strcmp(av[1], "-f"))
-	{
-		if ((fd = open(av[2], O_RDONLY)) == -1)
-			ft_delete_exit("File not exist", NULL, NULL);
-		while (get_next_line(fd, av) > 0)
-			datatostack(0, 1, av, &stackb);
-		while (stackb)
-			pa(&stacka, &stackb);
-		close(fd);
-	}
-	else
-		datatostack(ac - 1, 0, av, &stacka);
+		return (0);
+	handle_data(ac, av, &stacka, &stackb);
 	while (get_next_line(0, &line) > 0)
 		func_cmnds(&stacka, &stackb, line);
-	if (is_sorted(stacka))
+	if (is_sorted(stacka) && !stackb)
 		ft_putendl("OK");
 	else
 		ft_putendl("KO");

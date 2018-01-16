@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "push_swap.h"
 
 void	pa(t_stack **heada, t_stack **headb)
 {
@@ -80,7 +80,7 @@ void	rb(t_stack **head)
 	}
 }
 
-void rr(t_stack **heada, t_stack **headb)
+void	rr(t_stack **heada, t_stack **headb)
 {
 	ra(heada);
 	rb(headb);

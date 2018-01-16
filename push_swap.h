@@ -14,11 +14,11 @@
 # define PUSH_SWAP_H
 # include "libft/libft.h"
 # include "stack.h"
-# include "get_next_line.h"
 
 # define ABS(x) ((x < 0) ? (-x) : (x))
 
 void	datatostack(int ac, int file, char **av, t_stack **stack);
+void	handle_data(int ac, char **av, t_stack **a, t_stack **b);
 void	ft_delete_exit(char *message, t_stack **stack1, t_stack **stack2);
 int 	is_sorted(t_stack *stack);
 char	*ft_strjoin_fr_frst(char *s1, char const *s2);
@@ -40,5 +40,9 @@ void	myqsort_stack_b(t_stack **a, t_stack **b, int q, char **cmds);
 int 	find_min_val_n(t_stack *st, int q);
 int 	find_max_val_n(t_stack *st, int q);
 t_stack	*find_min_in_stack(t_stack *stack);
+
+void 	sort_3par_a(t_stack **st, char **cmds, int q);
+void 	sort_3par_b(t_stack **a, t_stack **b, char **cmds, int q);
+
 
 #endif

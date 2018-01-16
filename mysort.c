@@ -113,7 +113,6 @@ int		find_av_val(t_stack *st, int qel, int a)
 	i = 0;
 	newst = buble_sort_st(stcpy(st), qel);
 	tmp = newst;
-	//(void)a;
 	if (qel % 2 == 1 || a)
 		while (i < qel / 2)
 		{
@@ -172,7 +171,7 @@ int		push_half_to_a(t_stack **sta, t_stack **stb, char **cmds, int qel)
 	needrotate = (lstlen(*stb) != qel) ? 1 : 0;
 	av_val = find_av_val(*stb, qel, 0);
 	to_move = find_quant_to_move(*stb, av_val, '>');
-	while (i < to_move/*qel--*/)
+	while (i < to_move)
 		if ((*stb)->cont > av_val)
 		{
 			pa(sta, stb);
@@ -210,7 +209,7 @@ int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
 		return (0);
 	av_val = find_av_val(*sta, qel, 1);
 	to_move = find_quant_to_move(*sta, av_val, '<');
-	while (i < to_move/*qel--*/)
+	while (i < to_move)
 		if ((*sta)->cont <= av_val)
 		{
 			pb(sta, stb);

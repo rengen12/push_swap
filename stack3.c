@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
-#include "ft_printf/ft_printf.h"
+#include "push_swap.h"
 
-void rra(t_stack **head)
+void	rra(t_stack **head)
 {
 	t_stack *thead;
 

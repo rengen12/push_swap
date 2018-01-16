@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "handle_printf.h"
 
 void			read_conv_mod(t_fs *fs, const char **s)

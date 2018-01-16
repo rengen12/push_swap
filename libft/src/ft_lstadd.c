@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/22 15:05:00 by amichak           #+#    #+#             */
-/*   Updated: 2017/11/22 15:05:00 by amichak          ###   ########.fr       */
+/*   Created: 2017/10/30 15:29:00 by amichak           #+#    #+#             */
+/*   Updated: 2017/10/30 15:29:06 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-int	ft_printf(const char *format, ...);
-
-#endif
+void	ft_lstadd(t_list **alst, t_list *newlst)
+{
+	if (alst && newlst)
+	{
+		newlst->next = *alst;
+		*alst = newlst;
+	}
+}

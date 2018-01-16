@@ -28,13 +28,10 @@ OBJ = $(addprefix $(OBJFOLD),$(patsubst %.c, %.o, $(SRC)))
 all:				$(NAME)
 
 $(NAME):			$(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@echo "ft_printf: done"
 	
 $(OBJFOLD)%.o: 		%.c
 	@mkdir -p $(OBJFOLD)
-	$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
+	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJFOLD)

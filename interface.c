@@ -60,6 +60,32 @@ void	datatostack(int ac, int file, char **av, t_stack **stack)
 	}
 }
 
+void	handle_data(int ac, char **av, t_stack **a, t_stack **b)
+{
+	int 	fd;
+
+	if (ac == 3 && !ft_strcmp(av[1], "-f"))
+	{
+		if ((fd = open(av[2], O_RDONLY)) == -1)
+			ft_delete_exit("File not exist", NULL, NULL);
+		while (get_next_line(fd, av) > 0)
+			datatostack(0, 1, av, b);
+		while(*b)
+			pa(a, b);
+		close(fd);
+	}
+	else if (ac == 2)
+	{
+		av = ft_strsplit(av[1], ' ');
+		while (*av)
+			datatostack(0, 1, av++, b);
+		while(*b)
+			pa(a, b);
+	}
+	else
+		datatostack(ac - 1, 0, av, a);
+}
+
 int 	is_sorted(t_stack *stack)
 {
 	if (stack)

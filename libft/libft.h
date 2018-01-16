@@ -15,6 +15,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <fcntl.h>
+
+# define BUFF_SIZE 12
 
 typedef struct	s_list
 {
@@ -63,6 +66,7 @@ int				ft_strequ(const char *s1, const char *s2);
 int				ft_strnequ(const char *s1, const char *s2, size_t n);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin_fr_frst(char *s1, char const *s2);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
 char			*ft_itoa(int n);
@@ -77,7 +81,7 @@ void			ft_putnbr_fd(int n, int fd);
 t_list			*ft_lstnew(void const *content, size_t content_size);
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
-void			ft_lstadd(t_list **alst, t_list *new);
+void			ft_lstadd(t_list **alst, t_list *newlst);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_print_strtab(char **tab);
@@ -96,4 +100,7 @@ int				ft_srch_arrelem(int *arr, int size, int elem);
 void			ft_arrrev(int *arr, size_t size);
 int 			*ft_arrnew(int len);
 void			ft_putarr(int *arr, int len, char separator);
+int				get_next_line(const int fd, char **line);
+int				ft_printf(const char *format, ...);
+
 #endif
