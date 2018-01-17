@@ -36,5 +36,4 @@ void			rra(t_stack **head);
 void			rrb(t_stack **head);
 void			rrr(t_stack **heada, t_stack **headb);
 
-
 #endif

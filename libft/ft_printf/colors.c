@@ -22,55 +22,55 @@ static int		ft_putstr_col_code(char const *s)
 
 static int		parse_col_mcwu(char const *t)
 {
-	if (!ft_strcmp(t, "magenta"))
+	if (!ft_strcmp_pf(t, "magenta"))
 	{
-		if (!ft_strcmp(t, "magenta_bg}"))
+		if (!ft_strcmp_pf(t, "magenta_bg}"))
 			return (ft_putstr_col_code(MAGENTA_BG));
-		else if (!ft_strcmp(t, "magenta}"))
+		else if (!ft_strcmp_pf(t, "magenta}"))
 			return (ft_putstr_col_code(MAGENTA));
 	}
-	else if (!ft_strcmp(t, "cyan"))
+	else if (!ft_strcmp_pf(t, "cyan"))
 	{
-		if (!ft_strcmp(t, "cyan_bg}"))
+		if (!ft_strcmp_pf(t, "cyan_bg}"))
 			return (ft_putstr_col_code(CYAN_BG));
-		else if (!ft_strcmp(t, "cyan}"))
+		else if (!ft_strcmp_pf(t, "cyan}"))
 			return (ft_putstr_col_code(CYAN));
 	}
-	else if (!ft_strcmp(t, "white"))
+	else if (!ft_strcmp_pf(t, "white"))
 	{
-		if (!ft_strcmp(t, "white_bg}"))
+		if (!ft_strcmp_pf(t, "white_bg}"))
 			return (ft_putstr_col_code(WHITE_BG));
-		else if (!ft_strcmp(t, "white}"))
+		else if (!ft_strcmp_pf(t, "white}"))
 			return (ft_putstr_col_code(WHITE));
 	}
-	else if (!ft_strcmp(t, "underline}"))
+	else if (!ft_strcmp_pf(t, "underline}"))
 		return (ft_putstr_col_code(UNDERLINE));
 	return (0);
 }
 
 static int		parse_col_ergy(char const *t)
 {
-	if (!ft_strcmp(t, "eoc}"))
+	if (!ft_strcmp_pf(t, "eoc}"))
 		return (ft_putstr_col_code(EOC));
-	else if (!ft_strcmp(t, "red"))
+	else if (!ft_strcmp_pf(t, "red"))
 	{
-		if (!ft_strcmp(t, "red_bg}"))
+		if (!ft_strcmp_pf(t, "red_bg}"))
 			return (ft_putstr_col_code(RED_BG));
-		else if (!ft_strcmp(t, "red}"))
+		else if (!ft_strcmp_pf(t, "red}"))
 			return (ft_putstr_col_code(RED));
 	}
-	else if (!ft_strcmp(t, "green"))
+	else if (!ft_strcmp_pf(t, "green"))
 	{
-		if (!ft_strcmp(t, "green_bg}"))
+		if (!ft_strcmp_pf(t, "green_bg}"))
 			return (ft_putstr_col_code(GREEN_BG));
-		else if (!ft_strcmp(t, "green}"))
+		else if (!ft_strcmp_pf(t, "green}"))
 			return (ft_putstr_col_code(GREEN));
 	}
-	else if (!ft_strcmp(t, "yellow"))
+	else if (!ft_strcmp_pf(t, "yellow"))
 	{
-		if (!ft_strcmp(t, "yellow_bg}"))
+		if (!ft_strcmp_pf(t, "yellow_bg}"))
 			return (ft_putstr_col_code(YELLOW_BG));
-		else if (!ft_strcmp(t, "yellow}"))
+		else if (!ft_strcmp_pf(t, "yellow}"))
 			return (ft_putstr_col_code(YELLOW));
 	}
 	return (0);
@@ -78,29 +78,29 @@ static int		parse_col_ergy(char const *t)
 
 static int		parse_col_bi(char const *t)
 {
-	if (!ft_strcmp(t, "blue"))
+	if (!ft_strcmp_pf(t, "blue"))
 	{
-		if (!ft_strcmp(t, "blue_bg}"))
+		if (!ft_strcmp_pf(t, "blue_bg}"))
 			return (ft_putstr_col_code(BLUE_BG));
-		else if (!ft_strcmp(t, "{blue}"))
+		else if (!ft_strcmp_pf(t, "blue}"))
 			return (ft_putstr_col_code(BLUE));
 	}
-	else if (!ft_strcmp(t, "black"))
+	else if (!ft_strcmp_pf(t, "black"))
 	{
-		if (!ft_strcmp(t, "black_bg}"))
+		if (!ft_strcmp_pf(t, "black_bg}"))
 			return (ft_putstr_col_code(BLACK_BG));
-		else if (!ft_strcmp(t, "{black}"))
+		else if (!ft_strcmp_pf(t, "black}"))
 			return (ft_putstr_col_code(BLACK));
 	}
-	else if (!ft_strcmp(t, "bold}"))
+	else if (!ft_strcmp_pf(t, "bold}"))
 		return (ft_putstr_col_code(BOLD));
-	else if (!ft_strcmp(t, "blink}"))
+	else if (!ft_strcmp_pf(t, "blink}"))
 		return (ft_putstr_col_code(BLINK));
-	else if (!ft_strcmp(t, "italic}"))
+	else if (!ft_strcmp_pf(t, "italic}"))
 		return (ft_putstr_col_code(ITALIC));
-	else if (!ft_strcmp(t, "inverted}"))
+	else if (!ft_strcmp_pf(t, "inverted}"))
 		return (ft_putstr_col_code(INVERTED));
-	else if (!ft_strcmp(t, "invisible}"))
+	else if (!ft_strcmp_pf(t, "invisible}"))
 		return (ft_putstr_col_code(INVISIBLE));
 	return (0);
 }

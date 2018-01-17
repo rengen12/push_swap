@@ -62,18 +62,18 @@ void	print_stack(t_stack *head1, t_stack *head2)
 	{
 		if (head1)
 		{
-			ft_printf("%12d ", head1->cont);
+			ft_printf(" %12d", head1->cont);
 			head1 = head1->next;
 		}
 		else
-			ft_printf("%12c ", '-');
+			ft_printf("%12c", '-');
 		if (head2)
 		{
-			ft_printf("%12d\n", head2->cont);
+			ft_printf(" %12d\n", head2->cont);
 			head2 = head2->next;
 		}
 		else
 			ft_printf("%12c\n", '-');
 	}
-	ft_printf("________________________\n%12s %12s\n", "a", "b");
+	ft_printf("{green}_________________________\n %12s%12s{eoc}\n", "a", "b");
 }

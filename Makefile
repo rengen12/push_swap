@@ -18,12 +18,12 @@ OBJ2 =			$(addprefix $(OBJFOLD), $(patsubst %.c, %.o, $(SRC2)))
 
 all:			$(NAME1) $(NAME2)
 
-$(NAME1):		$(OBJ0) $(OBJ1) $(NAME2)
+$(NAME1):		$(OBJ0) $(OBJ1)
+	@make -C $(LIBFOLD) -f Makefile
 	@$(CC) $(CFLAGS) -o $(NAME1) $(OBJ0) $(OBJ1) $(LIBFT)
 	@echo "push_swap: done"
 
-$(NAME2):		$(OBJ2)
-	@make -C $(LIBFOLD) -f Makefile
+$(NAME2):		$(OBJ0) $(OBJ2)
 	@$(CC) $(CFLAGS) -o $(NAME2) $(OBJ0) $(OBJ2) $(LIBFT)
 	@echo "checker: done"
 

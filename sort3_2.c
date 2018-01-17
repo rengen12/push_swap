@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int 	max_at_the_end(t_stack **sta, t_stack **stb, char **cmds)
+int		max_at_the_end(t_stack **sta, t_stack **stb, char **cmds)
 {
 	rb(stb);
 	*cmds = ft_strjoin_fr_frst(*cmds, "rb\n");
@@ -25,26 +25,26 @@ int 	max_at_the_end(t_stack **sta, t_stack **stb, char **cmds)
 	return (2);
 }
 
-int		sort_3_nonempty_stb(t_stack **sta, t_stack **stb, char **cmds, int max)
+int		sort_3_nonempty_stb(t_stack **a, t_stack **b, char **cmds, int max)
 {
-	if (is_sorted_rev_n(*stb, 3))
+	if (is_sorted_rev_n(*b, 3))
 		return (3);
-	if ((*stb)->cont == max)
+	if ((*b)->cont == max)
 	{
-		pa(sta, stb);
+		pa(a, b);
 		*cmds = ft_strjoin_fr_frst(*cmds, "pa\n");
 		return (2);
 	}
-	else if ((*stb)->cont == find_min_val_n(*stb, 3) && (*stb)->next->cont == max)
+	else if ((*b)->cont == find_min_val_n(*b, 3) && (*b)->next->cont == max)
 	{
-		sb(stb);
+		sb(b);
 		*cmds = ft_strjoin_fr_frst(*cmds, "sb\n");
-		pa(sta, stb);
+		pa(a, b);
 		*cmds = ft_strjoin_fr_frst(*cmds, "pa\n");
 		return (2);
 	}
-	else if ((*stb)->next->next->cont == max)
-		return (max_at_the_end(sta, stb, cmds));
+	else if ((*b)->next->next->cont == max)
+		return (max_at_the_end(a, b, cmds));
 	return (3);
 }
 
@@ -57,9 +57,9 @@ void	pa3x(t_stack **sta, t_stack **stb, int q, char **cmds)
 	}
 }
 
-void 	sort_3par_b(t_stack **a, t_stack **b, char **cmds, int q)
+void	sort_3par_b(t_stack **a, t_stack **b, char **cmds, int q)
 {
-	int 	min;
+	int	min;
 
 	min = find_min_val_n(*b, q);
 	if (q == 3 && *b && (*b)->next && (*b)->next->next && lstlen(*b) == 3)

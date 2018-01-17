@@ -91,17 +91,15 @@ t_ps_fl *search_flags(int ac, char **av)
 	i = 0;
 	while (++i < ac)
 	{
-		ii = 1;
+		ii = 0;
 		if (av[i][0] == '-' && !ft_isdigit(av[i][1]))
-			while (av[i][ii])
+			while (av[i][++ii])
+			{
 				if (av[i][ii] == 'f')
 					fl->f = 1;
 				else if (av[i][ii] == 'v')
 					fl->v = 1;
-				else if (av[i][ii] == 'c')
-					fl->c = 1;
-				else
-					i++;
+			}
 		else
 			break ;
 	}
@@ -141,7 +139,7 @@ t_ps_fl *handle_data(int ac, char **av, t_stack **a, t_stack **b)
 		return (fl);
 	if (fl->f)
 	{
-		if ((fd = open(av[2], O_RDONLY)) == -1)
+		if ((fd = open(av[fl->st], O_RDONLY)) == -1)
 			ft_delete_exit("File not exist", NULL, NULL, &fl);
 		while (get_next_line(fd, av) > 0 && (fl->ac = 0) == 0)
 			datatostack(fl, 1, av, b);

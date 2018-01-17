@@ -36,9 +36,9 @@ void	sort_3_nonempty_sta(t_stack **st, char **cmds, int max)
 	}
 }
 
-void 	sort_3par_a(t_stack **st, char **cmds, int q)
+void	sort_3par_a(t_stack **st, char **cmds, int q)
 {
-	int 	max;
+	int	max;
 
 	max = find_max_val_n(*st, 3);
 	if (q == 3 && *st && (*st)->next && (*st)->next->next && lstlen(*st) == 3)
