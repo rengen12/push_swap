@@ -12,7 +12,23 @@
 
 #include "push_swap.h"
 
-int		max_at_the_end(t_stack **sta, t_stack **stb, char **cmds)
+int			find_min_val_n(t_stack *st, int q)
+{
+	int 	min;
+
+	if (!st)
+		return (0);
+	min = st->cont;
+	while (st && q--)
+	{
+		if (st->cont <  min)
+			min = st->cont;
+		st = st->next;
+	}
+	return (min);
+}
+
+static int	max_at_the_end(t_stack **sta, t_stack **stb, char **cmds)
 {
 	rb(stb);
 	*cmds = ft_strjoin_fr_frst(*cmds, "rb\n");
@@ -25,7 +41,7 @@ int		max_at_the_end(t_stack **sta, t_stack **stb, char **cmds)
 	return (2);
 }
 
-int		sort_3_nonempty_stb(t_stack **a, t_stack **b, char **cmds, int max)
+static int	sort_3_nonempty_stb(t_stack **a, t_stack **b, char **cmds, int max)
 {
 	if (is_sorted_rev_n(*b, 3))
 		return (3);
@@ -48,7 +64,7 @@ int		sort_3_nonempty_stb(t_stack **a, t_stack **b, char **cmds, int max)
 	return (3);
 }
 
-void	pa3x(t_stack **sta, t_stack **stb, int q, char **cmds)
+static void	pa3x(t_stack **sta, t_stack **stb, int q, char **cmds)
 {
 	while (*stb && q--)
 	{

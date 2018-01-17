@@ -12,7 +12,23 @@
 
 #include "push_swap.h"
 
-void	sort_3_nonempty_sta(t_stack **st, char **cmds, int max)
+int			find_max_val_n(t_stack *st, int q)
+{
+	int 	max;
+
+	if (!st)
+		return (0);
+	max = st->cont;
+	while (st && q--)
+	{
+		if (st->cont >  max)
+			max = st->cont;
+		st = st->next;
+	}
+	return (max);
+}
+
+void		sort_3_nonempty_sta(t_stack **st, char **cmds, int max)
 {
 	if ((*st)->next->cont == max)
 	{
@@ -36,7 +52,7 @@ void	sort_3_nonempty_sta(t_stack **st, char **cmds, int max)
 	}
 }
 
-void	sort_3par_a(t_stack **st, char **cmds, int q)
+void		sort_3par_a(t_stack **st, char **cmds, int q)
 {
 	int	max;
 

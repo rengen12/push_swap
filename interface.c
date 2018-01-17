@@ -12,25 +12,7 @@
 
 #include "push_swap.h"
 
-void	ft_error(char *message)
-{
-	ft_putendl_fd(message, 2);
-	exit(0);
-}
-
-void	ft_delete_exit(char *mess, t_stack **st1, t_stack **st2, t_ps_fl **f)
-{
-	if (st1)
-		delete_stack(st1);
-	if (st2)
-		delete_stack(st2);
-	if (f)
-		if (*f)
-			free(*f);
-	ft_error(mess);
-}
-
-int		check_duplicates(int num, t_stack *stack)
+static int		check_duplicates(int num, t_stack *stack)
 {
 	while (stack)
 		if (stack->cont == num)
@@ -40,7 +22,7 @@ int		check_duplicates(int num, t_stack *stack)
 	return (0);
 }
 
-void	datatostack(t_ps_fl *fl, int file, char **av, t_stack **stack)
+static void		datatostack(t_ps_fl *fl, int file, char **av, t_stack **stack)
 {
 	ssize_t	num;
 
@@ -65,22 +47,7 @@ void	datatostack(t_ps_fl *fl, int file, char **av, t_stack **stack)
 	}
 }
 
-
-t_ps_fl *alloc_struct(int ac)
-{
-	t_ps_fl	*fl;
-
-	if (!(fl = (t_ps_fl *)malloc(sizeof(t_ps_fl))))
-		return (NULL);
-	fl->c = 0;
-	fl->f = 0;
-	fl->v = 0;
-	fl->st = 0;
-	fl->ac = ac - 1;
-	return (fl);
-}
-
-t_ps_fl *search_flags(int ac, char **av)
+static t_ps_fl	*search_flags(int ac, char **av)
 {
 	t_ps_fl	*fl;
 	int		i;
@@ -107,7 +74,7 @@ t_ps_fl *search_flags(int ac, char **av)
 	return (fl);
 }
 
-int		is_com_line_arg(char *s)
+static int		is_com_line_arg(char *s)
 {
 	int 	res;
 
@@ -129,7 +96,7 @@ int		is_com_line_arg(char *s)
 	return (0);
 }
 
-t_ps_fl *handle_data(int ac, char **av, t_stack **a, t_stack **b)
+t_ps_fl			*handle_data(int ac, char **av, t_stack **a, t_stack **b)
 {
 	int 	fd;
 	t_ps_fl	*fl;
@@ -156,58 +123,4 @@ t_ps_fl *handle_data(int ac, char **av, t_stack **a, t_stack **b)
 	while(*b)
 		pa(a, b);
 	return (fl);
-}
-
-int 	is_sorted(t_stack *stack)
-{
-	if (stack)
-	{
-		while (stack->next)
-			if (stack->cont > stack->next->cont)
-				return (0);
-			else
-				stack = stack->next;
-	}
-	return (1);
-}
-
-int 	is_sorted_rev(t_stack *stack)
-{
-	if (stack)
-	{
-		while (stack->next)
-			if (stack->cont < stack->next->cont)
-				return (0);
-			else
-				stack = stack->next;
-	}
-	return (1);
-}
-
-int 	is_sorted_rev_n(t_stack *stack, int n)
-{
-	if (stack)
-	{
-		while (stack->next && n--)
-		{
-			if (stack->cont < stack->next->cont)
-				return (0);
-			else
-				stack = stack->next;
-		}
-	}
-	return (1);
-}
-
-int 	is_sorted_n(t_stack *st, int n)
-{
-	if (st)
-		while (st->next && n--)
-		{
-			if (st->cont > st->next->cont)
-				return (0);
-			else
-				st = st->next;
-		}
-	return (1);
 }

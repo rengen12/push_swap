@@ -1,70 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mysort.c                                           :+:      :+:    :+:   */
+/*   pushing_qsort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: rengen <rengen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/01 13:03:00 by amichak           #+#    #+#             */
-/*   Updated: 2018/01/01 13:03:00 by amichak          ###   ########.fr       */
+/*   Updated: 2018/01/18 00:37:36 by rengen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int		lstlen(t_stack *stack)
-{
-	int 	i;
-
-	i = 0;
-	while (stack)
-	{
-		i++;
-		stack = stack->next;
-	}
-	return (i);
-}
-
-int 	find_min_val_n(t_stack *st, int q)
-{
-	int 	min;
-
-	if (!st)
-		return (0);
-	min = st->cont;
-	while (st && q--)
-	{
-		if (st->cont <  min)
-			min = st->cont;
-		st = st->next;
-	}
-	return (min);
-}
-
-int 	find_max_val_n(t_stack *st, int q)
-{
-	int 	max;
-
-	if (!st)
-		return (0);
-	max = st->cont;
-	while (st && q--)
-	{
-		if (st->cont >  max)
-			max = st->cont;
-		st = st->next;
-	}
-	return (max);
-}
-
-void	swap_st_cont(int *a, int *b)
-{
-	int 	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
 
 t_stack *buble_sort_st(t_stack *st, int q)
 {
@@ -80,7 +26,7 @@ t_stack *buble_sort_st(t_stack *st, int q)
 		while (y < q - i - 1)
 		{
 			if (st && st->next && st->cont > st->next->cont)
-				swap_st_cont(&st->cont, &st->next->cont);
+				ft_swap(&st->cont, &st->next->cont);
 			y++;
 			if (st && st->next)
 				st = st->next;

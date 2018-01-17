@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: amichak <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/11/11 13:15:45 by amichak           #+#    #+#              #
+#    Updated: 2017/11/15 19:41:01 by amichak          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 .PHONY:		all clean fclean re $(NAME1) $(NAME2)
 
 CC =			gcc
@@ -5,9 +17,10 @@ CFLAGS =		-Wall -Wextra -Werror
 NAME1 =			push_swap
 NAME2 =			checker
 HEADER =		-I ./
-SRC0 =			stack1.c stack2.c stack3.c interface.c \
-				old_func.c
-SRC1 =			push_swap.c mysort.c sort3_1.c sort3_2.c
+SRC0 =			stack1.c stack2.c stack3.c interface.c is_sorted.c \
+				error.c helpers.c
+SRC1 =			push_swap.c sort3_1.c sort3_2.c opt_cmds.c myqsort.c \
+				pushing_qsort.c
 SRC2 =			checker.c
 OBJFOLD =		./obj/
 LIBFOLD =		./libft/
