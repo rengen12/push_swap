@@ -20,7 +20,7 @@ HEADER =		-I ./
 SRC0 =			stack1.c stack2.c stack3.c interface.c is_sorted.c \
 				error.c helpers.c
 SRC1 =			push_swap.c sort3_1.c sort3_2.c opt_cmds.c myqsort.c \
-				pushing_qsort.c
+				pushing_qsort.c pushing_qsort_addition.c select_sort.c
 SRC2 =			checker.c
 OBJFOLD =		./obj/
 LIBFOLD =		./libft/

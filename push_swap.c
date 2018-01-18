@@ -42,8 +42,8 @@ int				main(int ac, char **av)
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka, &stackb, &fl);
 	else
-		if (sort_factor(stacka, lstlen(stacka)) >= 76.9)
-			cmds = mysort(&stacka, &stackb, cmds);
+		if (sort_factor(stacka, lstlen(stacka)) >= 70.0)
+			cmds = selection_sort(&stacka, &stackb, cmds);
 		else
 			myqsort_stack_a(&stacka, &stackb, lstlen(stacka), &cmds);
 	cmds = opt_cmds(cmds);
