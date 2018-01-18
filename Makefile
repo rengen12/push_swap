@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY:		all clean fclean re $(NAME1) $(NAME2)
+.PHONY:			all clean fclean re $(NAME1) $(NAME2)
 
 CC =			gcc
 CFLAGS =		-Wall -Wextra -Werror

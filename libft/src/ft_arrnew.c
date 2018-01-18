@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arrnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/30 22:11:00 by amichak           #+#    #+#             */
-/*   Updated: 2017/12/30 22:11:00 by amichak          ###   ########.fr       */
+/*   Created: 2018/01/18 16:30:04 by amichak           #+#    #+#             */
+/*   Updated: 2018/01/18 16:30:06 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int 	*ft_arrnew(int len)
+int		*ft_arrnew(int len)
 {
-	int		*mas;
+	int	*mas;
 
 	if (!(mas = (int *)malloc(sizeof(int) * len)))
 		return (NULL);

@@ -14,14 +14,14 @@
 
 int			find_min_val_n(t_stack *st, int q)
 {
-	int 	min;
+	int min;
 
 	if (!st)
 		return (0);
 	min = st->cont;
 	while (st && q--)
 	{
-		if (st->cont <  min)
+		if (st->cont < min)
 			min = st->cont;
 		st = st->next;
 	}
@@ -73,7 +73,7 @@ static void	pa3x(t_stack **sta, t_stack **stb, int q, char **cmds)
 	}
 }
 
-void	sort_3par_b(t_stack **a, t_stack **b, char **cmds, int q)
+void		sort_3par_b(t_stack **a, t_stack **b, char **cmds, int q)
 {
 	int	min;
 

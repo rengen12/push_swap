@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interface.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/29 20:44:00 by amichak           #+#    #+#             */
-/*   Updated: 2017/12/29 20:44:00 by amichak          ###   ########.fr       */
+/*   Created: 2018/01/18 17:21:50 by amichak           #+#    #+#             */
+/*   Updated: 2018/01/18 17:21:52 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static t_ps_fl	*search_flags(int ac, char **av)
 {
 	t_ps_fl	*fl;
 	int		i;
-	int 	ii;
+	int		ii;
 
 	if (!(fl = alloc_struct(ac)))
 		return (NULL);
@@ -76,7 +76,7 @@ static t_ps_fl	*search_flags(int ac, char **av)
 
 static int		is_com_line_arg(char *s)
 {
-	int 	res;
+	int		res;
 
 	res = 0;
 	while (*s && !ft_isdigit(*s))
@@ -98,7 +98,7 @@ static int		is_com_line_arg(char *s)
 
 t_ps_fl			*handle_data(int ac, char **av, t_stack **a, t_stack **b)
 {
-	int 	fd;
+	int		fd;
 	t_ps_fl	*fl;
 
 	fl = search_flags(ac, av);
@@ -120,7 +120,7 @@ t_ps_fl			*handle_data(int ac, char **av, t_stack **a, t_stack **b)
 	}
 	else
 		datatostack(fl, 0, av, a);
-	while(*b)
+	while (*b)
 		pa(a, b);
 	return (fl);
 }

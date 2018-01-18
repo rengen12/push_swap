@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/17 23:49:00 by amichak           #+#    #+#             */
-/*   Updated: 2018/01/17 23:49:00 by amichak          ###   ########.fr       */
+/*   Created: 2018/01/18 17:23:37 by amichak           #+#    #+#             */
+/*   Updated: 2018/01/18 17:23:38 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_ps_fl	*alloc_struct(int ac)
 
 int		lstlen(t_stack *stack)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	while (stack)

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   pushing_qsort_addition.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/18 12:29:00 by amichak           #+#    #+#             */
-/*   Updated: 2018/01/18 12:29:00 by amichak          ###   ########.fr       */
+/*   Created: 2018/01/18 16:36:00 by amichak           #+#    #+#             */
+/*   Updated: 2018/01/18 16:36:01 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *buble_sort_st(t_stack *st, int q)
+t_stack	*buble_sort_st(t_stack *st, int q)
 {
-	int	i;
-	int y;
+	int		i;
+	int		y;
 	t_stack *head;
 
 	i = 0;
@@ -37,7 +37,7 @@ t_stack *buble_sort_st(t_stack *st, int q)
 	return (st);
 }
 
-t_stack *stcpy(t_stack *st)
+t_stack	*stcpy(t_stack *st)
 {
 	t_stack *newst;
 
@@ -51,10 +51,10 @@ t_stack *stcpy(t_stack *st)
 
 int		find_av_val(t_stack *st, int qel, int a)
 {
-	int 	i;
+	int		i;
 	t_stack *newst;
 	t_stack *tmp;
-	int 	res;
+	int		res;
 
 	i = 0;
 	newst = buble_sort_st(stcpy(st), qel);
@@ -78,7 +78,7 @@ int		find_av_val(t_stack *st, int qel, int a)
 
 int		find_quant_to_move(t_stack *st, int av_val, char s_cmp)
 {
-	int 	res;
+	int		res;
 
 	res = 0;
 	if (s_cmp == '<')

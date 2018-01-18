@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   is_sorted.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/17 23:41:00 by amichak           #+#    #+#             */
-/*   Updated: 2018/01/17 23:41:00 by amichak          ###   ########.fr       */
+/*   Created: 2018/01/18 16:41:53 by amichak           #+#    #+#             */
+/*   Updated: 2018/01/18 16:41:54 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int 	is_sorted(t_stack *stack)
+int		is_sorted(t_stack *stack)
 {
 	if (stack)
 	{
@@ -25,7 +25,7 @@ int 	is_sorted(t_stack *stack)
 	return (1);
 }
 
-int 	is_sorted_rev_n(t_stack *stack, int n)
+int		is_sorted_rev_n(t_stack *stack, int n)
 {
 	if (stack)
 	{
@@ -40,7 +40,7 @@ int 	is_sorted_rev_n(t_stack *stack, int n)
 	return (1);
 }
 
-int 	is_sorted_n(t_stack *st, int n)
+int		is_sorted_n(t_stack *st, int n)
 {
 	if (st)
 		while (st->next && n--)

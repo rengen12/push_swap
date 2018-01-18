@@ -21,7 +21,7 @@ void	rot_in_start_pos(char *instr, int rx, t_stack **st, char **cmds)
 	}
 }
 
-int 	find_to_move_a(t_stack **stb, int *av_val, int qel, int *needrotate)
+int		find_to_move_a(t_stack **stb, int *av_val, int qel, int *needrotate)
 {
 	if (!*stb)
 		return (0);
@@ -32,10 +32,10 @@ int 	find_to_move_a(t_stack **stb, int *av_val, int qel, int *needrotate)
 
 int		push_half_to_a(t_stack **sta, t_stack **stb, char **cmds, int qel)
 {
-	int 	av_val;
-	int 	to_move;
-	int 	rx;
-	int 	needrotate;
+	int		av_val;
+	int		to_move;
+	int		rx;
+	int		needrotate;
 	int		i;
 
 	i = 0;
@@ -59,7 +59,7 @@ int		push_half_to_a(t_stack **sta, t_stack **stb, char **cmds, int qel)
 	return (to_move);
 }
 
-int 	find_to_move_b(t_stack **sta, int *av_val, int qel, int *needrotate)
+int		find_to_move_b(t_stack **sta, int *av_val, int qel, int *needrotate)
 {
 	if (!*sta)
 		return (0);
@@ -70,11 +70,11 @@ int 	find_to_move_b(t_stack **sta, int *av_val, int qel, int *needrotate)
 
 int		push_half_to_b(t_stack **sta, t_stack **stb, char **cmds, int qel)
 {
-	int 	av_val;
-	int 	to_move;
-	int 	rx;
-	int 	needrotate;
-	int 	i;
+	int		av_val;
+	int		to_move;
+	int		rx;
+	int		needrotate;
+	int		i;
 
 	i = 0;
 	rx = 0;

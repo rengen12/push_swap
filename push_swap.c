@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/29 20:40:00 by amichak           #+#    #+#             */
-/*   Updated: 2017/12/29 20:40:00 by amichak          ###   ########.fr       */
+/*   Created: 2018/01/18 17:14:26 by amichak           #+#    #+#             */
+/*   Updated: 2018/01/18 17:14:28 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				main(int ac, char **av)
 {
 	t_stack *stacka;
 	t_stack *stackb;
-	char 	*cmds;
+	char	*cmds;
 	t_ps_fl	*fl;
 
 	stacka = NULL;
@@ -41,11 +41,10 @@ int				main(int ac, char **av)
 	cmds = ft_strnew(1);
 	if (is_sorted(stacka))
 		ft_delete_exit("Stack is sorted", &stacka, &stackb, &fl);
+	else if (sort_factor(stacka, lstlen(stacka)) >= 70.0)
+		cmds = selection_sort(&stacka, &stackb, cmds);
 	else
-		if (sort_factor(stacka, lstlen(stacka)) >= 70.0)
-			cmds = selection_sort(&stacka, &stackb, cmds);
-		else
-			myqsort_stack_a(&stacka, &stackb, lstlen(stacka), &cmds);
+		myqsort_stack_a(&stacka, &stackb, lstlen(stacka), &cmds);
 	cmds = opt_cmds(cmds);
 	cmds = opt_cmds(cmds);
 	cmds = opt_cmds(cmds);

@@ -14,14 +14,14 @@
 
 int			find_max_val_n(t_stack *st, int q)
 {
-	int 	max;
+	int	max;
 
 	if (!st)
 		return (0);
 	max = st->cont;
 	while (st && q--)
 	{
-		if (st->cont >  max)
+		if (st->cont > max)
 			max = st->cont;
 		st = st->next;
 	}

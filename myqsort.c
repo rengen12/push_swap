@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   myqsort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/18 00:19:00 by amichak           #+#    #+#             */
-/*   Updated: 2018/01/18 00:19:00 by amichak          ###   ########.fr       */
+/*   Created: 2018/01/18 17:20:14 by amichak           #+#    #+#             */
+/*   Updated: 2018/01/18 17:20:17 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	myqsort_stack_b(t_stack **a, t_stack **b, int q, char **cmds)
 {
-	int		moved;
-	int 	i;
+	int	moved;
+	int	i;
 
 	i = 0;
 	if (is_sorted_rev_n(*b, q))
@@ -38,9 +38,9 @@ void	myqsort_stack_b(t_stack **a, t_stack **b, int q, char **cmds)
 		sort_3par_b(a, b, cmds, q);
 }
 
-void		myqsort_stack_a(t_stack **a, t_stack **b, int q, char **cmds)
+void	myqsort_stack_a(t_stack **a, t_stack **b, int q, char **cmds)
 {
-	int		moved;
+	int	moved;
 
 	if (is_sorted_n(*a, q))
 		return ;

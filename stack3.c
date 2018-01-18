@@ -14,7 +14,7 @@
 
 void	rra(t_stack **head)
 {
-	t_stack *thead;
+	t_stack	*thead;
 
 	if (head)
 	{

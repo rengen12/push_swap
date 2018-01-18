@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opt_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/17 23:56:00 by amichak           #+#    #+#             */
-/*   Updated: 2018/01/17 23:56:00 by amichak          ###   ########.fr       */
+/*   Created: 2018/01/18 17:16:19 by amichak           #+#    #+#             */
+/*   Updated: 2018/01/18 17:16:20 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	in_str(const char *str, const char *to_find)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (to_find[i] && str[i] && to_find[i] == str[i])
@@ -33,9 +33,9 @@ static int	change_instr(char **res, char *inst_to_paste, int ic, int *i)
 
 char		*opt_cmds(char *c)
 {
-	char 	*res;
-	int 	i;
-	int 	ic;
+	char	*res;
+	int		i;
+	int		ic;
 
 	i = 0;
 	ic = 0;

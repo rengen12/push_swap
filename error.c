@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amichak <amichak@marvin@42.fr>             +#+  +:+       +#+        */
+/*   By: amichak <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/17 23:46:00 by amichak           #+#    #+#             */
-/*   Updated: 2018/01/17 23:46:00 by amichak          ###   ########.fr       */
+/*   Created: 2018/01/18 17:22:54 by amichak           #+#    #+#             */
+/*   Updated: 2018/01/18 17:22:56 by amichak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_error(char *message)
 }
 
 void		ft_delete_exit(char *mess, t_stack **st1, t_stack **st2,
-						   t_ps_fl **f)
+						t_ps_fl **f)
 {
 	if (st1)
 		delete_stack(st1);

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int		choose_direct_rot(t_stack *stack, t_stack *min)
+static int		choose_direct_rot(t_stack *stack, t_stack *min)
 {
 	int	r;
 	int	rr;
@@ -35,7 +35,7 @@ int		choose_direct_rot(t_stack *stack, t_stack *min)
 		return (0);
 }
 
-t_stack	*find_min_in_stack(t_stack *stack)
+static t_stack	*find_min_in_stack(t_stack *stack)
 {
 	t_stack	*min_el;
 
@@ -51,7 +51,27 @@ t_stack	*find_min_in_stack(t_stack *stack)
 	return (min_el);
 }
 
-char	*selection_sort(t_stack **sta, t_stack **stb, char *cmds)
+static char		*swapping(char *cmds, t_stack **sta, t_stack *min)
+{
+	if ((*sta)->cont > (*sta)->next->cont && min != *sta)
+	{
+		sa(sta);
+		cmds = ft_strjoin_fr_frst(cmds, "sa\n");
+	}
+	return (cmds);
+}
+
+static char		*push_to_a(t_stack **sta, t_stack **stb, char *cmds)
+{
+	while (*stb)
+	{
+		pa(sta, stb);
+		cmds = ft_strjoin_fr_frst(cmds, "pa\n");
+	}
+	return (cmds);
+}
+
+char			*selection_sort(t_stack **sta, t_stack **stb, char *cmds)
 {
 	t_stack *min;
 
@@ -63,30 +83,17 @@ char	*selection_sort(t_stack **sta, t_stack **stb, char *cmds)
 			{
 				cmds = ft_strjoin_fr_frst(cmds, "ra\n");
 				ra(sta);
-				if ((*sta)->cont > (*sta)->next->cont && min != *sta)
-				{
-					sa(sta);
-					cmds = ft_strjoin_fr_frst(cmds, "sa\n");
-				}
+				cmds = swapping(cmds, sta, min);
 			}
 		else
 			while (min != *sta)
 			{
 				cmds = ft_strjoin_fr_frst(cmds, "rra\n");
 				rra(sta);
-				if ((*sta)->cont > (*sta)->next->cont && min != *sta)
-				{
-					sa(sta);
-					cmds = ft_strjoin_fr_frst(cmds, "sa\n");
-				}
+				cmds = swapping(cmds, sta, min);
 			}
 		pb(sta, stb);
 		cmds = ft_strjoin_fr_frst(cmds, "pb\n");
 	}
-	while (*stb)
-	{
-		pa(sta, stb);
-		cmds = ft_strjoin_fr_frst(cmds, "pa\n");
-	}
-	return (cmds);
+	return (push_to_a(sta, stb, cmds));
 }
